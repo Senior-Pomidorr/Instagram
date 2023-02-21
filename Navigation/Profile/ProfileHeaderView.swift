@@ -9,19 +9,20 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-   
-    private let backgroundColorView: UIView = {
-        let backgroundColorView = UIView()
-        return backgroundColorView
-        
+    private var profileView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        return view
     }()
+
     
-     private let showStatusButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 20, y: 216, width: 350, height: 50))
+    private let showStatusButton: UIButton = {
+        var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.layer.backgroundColor = #colorLiteral(red: 0, green: 0.4780646563, blue: 0.9985368848, alpha: 1)
         button.layer.cornerRadius = 16
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -31,8 +32,9 @@ class ProfileHeaderView: UIView {
     }()
     
     private let photoProfile: UIImageView = {
-        var photo = UIImageView(frame: CGRect(x: 16, y: 100, width: 100, height: 100))
+        var photo = UIImageView()
         photo.clipsToBounds = true
+        photo.translatesAutoresizingMaskIntoConstraints = false
         photo.image = picture.picturePhoto
         photo.contentMode = .scaleAspectFill
         photo.layer.cornerRadius = 50
@@ -42,16 +44,28 @@ class ProfileHeaderView: UIView {
     }()
     
     var nameLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 150, y: 97, width: 350, height: 50))
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Kanye West"
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         return label
     }()
     
+    var textField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "Waiting for something"
+        textField.font = .systemFont(ofSize: 14, weight: .regular)
+        textField.textColor = .gray
+        return textField
+    }()
+    
     func button() -> UIButton {
         showStatusButton
     }
+    
+    
     
     init() {
         super.init(frame: .zero)
@@ -62,34 +76,45 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
     
-    
+extension ProfileHeaderView {
     func customizeViews() {
-        addSubview(backgroundColorView)
-        backgroundColorView.addSubview(showStatusButton)
-        backgroundColorView.addSubview(photoProfile)
-        backgroundColorView.addSubview(nameLabel)
+        backgroundColor = .white
+        addSubview(profileView)
+        profileView.addSubview(showStatusButton)
+        profileView.addSubview(photoProfile)
+        profileView.addSubview(nameLabel)
+        
+        
+        NSLayoutConstraint.activate([
+            profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            profileView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            profileView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            profileView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            photoProfile.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 16),
+            photoProfile.leadingAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            photoProfile.widthAnchor.constraint(equalToConstant: 100),
+            photoProfile.heightAnchor.constraint(equalToConstant: 100),
+            
+            showStatusButton.topAnchor.constraint(equalTo: photoProfile.bottomAnchor, constant: 16),
+            showStatusButton.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 16),
+            showStatusButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16),
+            showStatusButton.widthAnchor.constraint(equalToConstant: 360),
+            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            nameLabel.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 27),
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+
+         
+            
+           ])
+         
+    
+        
     }
-//        backgroundColorView.addSubview(showStatusButton)
-//        NSLayoutConstraint.activate([
-//            showStatusButton.topAnchor.constraint(equalTo: backgroundColorView.safeAreaLayoutGuide.topAnchor, constant: 350),
-//            showStatusButton.leadingAnchor.constraint(equalTo: backgroundColorView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-////            showStatusButton.trailingAnchor.constraint(equalTo: backgroundColorView.trailingAnchor, constant: -120)
-//            showStatusButton.widthAnchor.constraint(equalToConstant: 350),
-//            showStatusButton.heightAnchor.constraint(equalToConstant: 60)
-//
-//        ])
-    
-    
-    
-   
-    
-    
-    
     enum picture {
         static var picturePhoto = UIImage(named: "kanye west")
     }
-
-
-
 }

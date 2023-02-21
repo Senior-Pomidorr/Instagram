@@ -9,13 +9,13 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-
     private let profileView = ProfileHeaderView()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Profile"
-        
         
     }
     
@@ -23,10 +23,8 @@ final class ProfileViewController: UIViewController {
         super.viewWillLayoutSubviews()
         profileView.frame = view.frame
         view.addSubview(profileView)
-        profileView.backgroundColor = .lightGray
-    
+     
+        
     }
     
-    
-
 }

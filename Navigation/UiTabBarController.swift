@@ -12,22 +12,29 @@ class UiTabBarController: UITabBarController {
     private let firstVC = UINavigationController(rootViewController: FeedViewController())
     private let secondVC = UINavigationController(rootViewController: ProfileViewController())
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
     }
     
+   
+    
     private func setupControllers() {
         self.tabBar.backgroundColor = .white
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.barTintColor = .cyan
+//        self.navigationController?.navigationBar.tintColor = .white
+
         firstVC.tabBarItem.title = "Лента"
         firstVC.tabBarItem.image = UIImage(systemName: "house.fill")
-    
+        
         secondVC.tabBarItem.title = "Профиль"
         secondVC.tabBarItem.image = UIImage(systemName: "person.fill")
-        
         viewControllers = [firstVC, secondVC]
-        
+    
     }
+    
 }
 
 

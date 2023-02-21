@@ -35,6 +35,4 @@ class PostViewController: UIViewController {
         info.title = "Info"
         present(info, animated: true)
     }
-
-
 }
