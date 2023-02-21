@@ -35,7 +35,7 @@ class ProfileHeaderView: UIView {
         var photo = UIImageView()
         photo.clipsToBounds = true
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.image = picture.picturePhoto
+        photo.image = Picture.picturePhoto
         photo.contentMode = .scaleAspectFill
         photo.layer.cornerRadius = 50
         photo.layer.borderWidth = 3
@@ -57,15 +57,13 @@ class ProfileHeaderView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.text = "Waiting for something"
         textField.font = .systemFont(ofSize: 14, weight: .regular)
-        textField.textColor = .gray
+        textField.textColor = .black
         return textField
     }()
     
     func button() -> UIButton {
         showStatusButton
     }
-    
-    
     
     init() {
         super.init(frame: .zero)
@@ -85,7 +83,7 @@ extension ProfileHeaderView {
         profileView.addSubview(showStatusButton)
         profileView.addSubview(photoProfile)
         profileView.addSubview(nameLabel)
-        
+        profileView.addSubview(textField)
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -103,18 +101,17 @@ extension ProfileHeaderView {
             showStatusButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16),
             showStatusButton.widthAnchor.constraint(equalToConstant: 360),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            
+        
             nameLabel.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 27),
-            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-
-         
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: photoProfile.trailingAnchor, constant: 26),
+            
+            textField.bottomAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -34),
+            textField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16)
             
            ])
          
-    
-        
     }
-    enum picture {
-        static var picturePhoto = UIImage(named: "kanye west")
-    }
+  
 }

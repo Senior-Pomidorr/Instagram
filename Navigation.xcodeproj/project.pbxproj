@@ -17,6 +17,7 @@
 		0D36599C299B9DA3008C47CC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D36599B299B9DA3008C47CC /* Info.swift */; };
 		0D57880329A0CEDE008036D7 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */; };
 		0D57880629A0F974008036D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57880529A0F974008036D7 /* Post.swift */; };
+		0D796DEB29A5423F00D24240 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D796DEA29A5423F00D24240 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0D36599B299B9DA3008C47CC /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		0D57880529A0F974008036D7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		0D796DEA29A5423F00D24240 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 		0D15E035299E481E000BBBD9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D796DEA29A5423F00D24240 /* Extensions.swift */,
 				0D57880529A0F974008036D7 /* Post.swift */,
 				0D36596429950EA9008C47CC /* Assets.xcassets */,
 				0D36599B299B9DA3008C47CC /* Info.swift */,
@@ -177,6 +180,7 @@
 				0D3659932996F954008C47CC /* FeedViewController.swift in Sources */,
 				0D3659952996F967008C47CC /* ProfileViewController.swift in Sources */,
 				0D36599C299B9DA3008C47CC /* Info.swift in Sources */,
+				0D796DEB29A5423F00D24240 /* Extensions.swift in Sources */,
 				0D3659972997C0E0008C47CC /* UiTabBarController.swift in Sources */,
 				0D57880629A0F974008036D7 /* Post.swift in Sources */,
 				0D36595E29950EA7008C47CC /* SceneDelegate.swift in Sources */,
