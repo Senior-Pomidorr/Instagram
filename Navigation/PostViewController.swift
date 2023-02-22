@@ -23,7 +23,6 @@ class PostViewController: UIViewController {
         view.backgroundColor = .systemPink
         self.navigationItem.title = "Your Post"
         setupButtonInfo()
-        // Do any additional setup after loading the view.
     }
 
     private func setupButtonInfo() {
@@ -32,24 +31,8 @@ class PostViewController: UIViewController {
     }
     
     @objc private func actionTabInfo() {
-        var info = Info()
+        let info = Info()
         info.title = "Info"
         present(info, animated: true)
     }
-
-    struct Post {
-        var title: String
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

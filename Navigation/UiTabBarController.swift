@@ -9,34 +9,32 @@ import UIKit
 
 class UiTabBarController: UITabBarController {
     
-    private let firstVC = FeedViewController()
-    private let secondVC = ProfileViewController()
+    private let firstVC = UINavigationController(rootViewController: FeedViewController())
+    private let secondVC = UINavigationController(rootViewController: ProfileViewController())
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
     }
     
+   
+    
     private func setupControllers() {
-        let navigationController = UINavigationController(rootViewController: firstVC)
-        firstVC.tabBarItem.title = "Лента"
-        firstVC.tabBarItem.image = UIImage(systemName: "square.and.arrow.up")
-        
-        let navigationControllerSecond = UINavigationController(rootViewController: secondVC)
-        secondVC.tabBarItem.title = "Профиль"
-        secondVC.tabBarItem.image = UIImage(systemName: "plus")
-        
-        viewControllers = [firstVC, secondVC]
-        
-    }
-}
-    /*
-    // MARK: - Navigation
+        self.tabBar.backgroundColor = .white
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.barTintColor = .cyan
+//        self.navigationController?.navigationBar.tintColor = .white
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        firstVC.tabBarItem.title = "Лента"
+        firstVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        
+        secondVC.tabBarItem.title = "Профиль"
+        secondVC.tabBarItem.image = UIImage(systemName: "person.fill")
+        viewControllers = [firstVC, secondVC]
+    
     }
-    */
+    
+}
+
 
