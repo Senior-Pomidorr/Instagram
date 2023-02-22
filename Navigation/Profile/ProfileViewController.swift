@@ -15,6 +15,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Profile"
         buttonTarget()
+        
        
     }
     
@@ -22,20 +23,10 @@ final class ProfileViewController: UIViewController {
         super.viewWillLayoutSubviews()
         profileView.frame = view.frame
         view.addSubview(profileView)
-        
-        
-        
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//    }
-    
-    
-   
-   
-    
+ 
+
     func buttonTarget() {
         profileView.button().addTarget(self, action: #selector(actionButton), for: .touchUpInside)
     }
@@ -44,16 +35,9 @@ final class ProfileViewController: UIViewController {
         print("Статус")
     }
     
-//    func customizeViews() {
-//
-//            
-//            NSLayoutConstraint.activate([
-//                profileView.view().topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//                profileView.view().leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//                profileView.view().trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//                profileView.view().heightAnchor.constraint(equalToConstant: 220),
-//                
-//            ])
-//        }
-    }
+    
+
+}
+
+
     

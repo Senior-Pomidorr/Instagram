@@ -103,7 +103,7 @@ class ProfileHeaderView: UIView {
             profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             profileView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             profileView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            profileView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            profileView.heightAnchor.constraint(equalToConstant: 220),
             
             avatarImageView.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -129,9 +129,9 @@ class ProfileHeaderView: UIView {
             statusTextField.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            changeTitleButton.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 0),
-            changeTitleButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: 0),
-            changeTitleButton.bottomAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.bottomAnchor),
+            changeTitleButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            changeTitleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            changeTitleButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             changeTitleButton.heightAnchor.constraint(equalToConstant: 50),
             
             
