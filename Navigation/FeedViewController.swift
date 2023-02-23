@@ -12,27 +12,26 @@ final class FeedViewController: UIViewController {
     private var textForLabel: String?
     
     private let feedViewButton = UITabBarItem()
-    private lazy var button = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 220, height: 60))
-        button.setTitle("Переход на пост", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 16
-        return button
-    }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        setupButton()
         title = textForLabel
+        setupButton()
+        setupButtonTwo()
+        loyout()
     }
     
     
     private func setupButton() {
-        view.addSubview(button)
-        button.center = view.center
-        button.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
+        view.addSubview(buttonOne)
+        buttonOne.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
+    }
+    
+    private func setupButtonTwo() {
+        view.addSubview(buttonTwo)
+        buttonTwo.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
     }
     
     @objc private func actionTab() {
@@ -41,11 +40,48 @@ final class FeedViewController: UIViewController {
         print("Touch Button")
     }
     
+    private let stackView: UIStackView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.distribution = .fillEqually
+        return $0
+    }(UIStackView())
+    
+    private let buttonOne: UIButton = {
+        let button = UIButton()
+        button.setTitle("Переход на пост", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 16
+        return button
+    }()
+    
+    private let buttonTwo: UIButton = {
+        let button = UIButton()
+        button.setTitle("Переход на пост", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 16
+        return button
+    }()
     
     private let myLabel: UILabel = {
         let myLabel = UILabel(frame: CGRect(x: 20, y: 150, width: 20, height: 40))
         return myLabel
     } ()
+    
+    
+    private func loyout() {
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(buttonOne)
+        stackView.addArrangedSubview(buttonTwo)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            stackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),    
+        ])
+    }
     
     init(textForLabel: String? = nil) {
         self.textForLabel = textForLabel
