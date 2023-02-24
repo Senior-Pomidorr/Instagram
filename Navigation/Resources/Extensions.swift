@@ -9,4 +9,5 @@ import UIKit
 
 enum Picture {
     static var picturePhoto = UIImage(named: "kanye west")
+    static var logo = UIImage(named: "logo")
 }
