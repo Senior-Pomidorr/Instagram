@@ -9,10 +9,26 @@ import UIKit
 
 final class LogInViewController: UIViewController {
     
+    private let notifiacation = NotificationCenter.default
+    
     @objc private func logInButtonAction() {
         let profileView = ProfileViewController()
              navigationController?.pushViewController(profileView, animated: true)
     }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = keyboardSize.height
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        scrollView.contentInset = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
+        
+    }
+    
     
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +52,8 @@ final class LogInViewController: UIViewController {
     lazy var TextFieldLogin: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.text = "Email of phone"
+        textField.placeholder = "Email of phone"
+        textField.delegate = self
         textField.font = .systemFont(ofSize: 16)
         textField.textColor = UIColor.tintColor
         textField.autocapitalizationType = .none
@@ -53,7 +70,9 @@ final class LogInViewController: UIViewController {
     lazy var TextFieldPassword: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.text = "Email of phone"
+        textField.placeholder = "Email of phone"
+        textField.delegate = self
+        textField.isSecureTextEntry = true
         textField.font = .systemFont(ofSize: 16)
         textField.textColor = UIColor.tintColor
         textField.autocapitalizationType = .none
@@ -88,6 +107,19 @@ final class LogInViewController: UIViewController {
 
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notifiacation.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notifiacation.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notifiacation.removeObserver(UIResponder.keyboardWillShowNotification)
+        notifiacation.removeObserver(UIResponder.keyboardWillHideNotification)
+    }
+    
     private func loyout() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -102,10 +134,10 @@ final class LogInViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
@@ -126,13 +158,21 @@ final class LogInViewController: UIViewController {
             LogInButton.topAnchor.constraint(equalTo: TextFieldPassword.bottomAnchor, constant: 16),
             LogInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             LogInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            LogInButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -160),
             LogInButton.heightAnchor.constraint(equalToConstant: 50)
-            
+        
         ])
         
     }
     
 }
 
+extension LogInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
 
 
