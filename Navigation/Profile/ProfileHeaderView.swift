@@ -84,6 +84,7 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 16
         textField.layer.backgroundColor = UIColor.white.cgColor
         textField.layer.cornerRadius = 12
+        textField.indent(size: 10)
         textField.layer.borderColor = UIColor.black.cgColor
         textField.addTarget(self, action: #selector(statusLabelChanged), for: .editingChanged)
         return textField

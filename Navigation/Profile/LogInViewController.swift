@@ -9,6 +9,11 @@ import UIKit
 
 final class LogInViewController: UIViewController {
     
+    @objc private func logInButtonAction() {
+        let profileView = ProfileViewController()
+             navigationController?.pushViewController(profileView, animated: true)
+    }
+    
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -38,6 +43,7 @@ final class LogInViewController: UIViewController {
         textField.layer.backgroundColor = UIColor.systemGray6.cgColor
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
+        textField.indent(size: 10)
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 //        textField.addTarget(self, action: #selector(statusLabelChanged), for: .editingChanged)
@@ -54,6 +60,7 @@ final class LogInViewController: UIViewController {
         textField.layer.backgroundColor = UIColor.systemGray6.cgColor
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
+        textField.indent(size: 10)
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 //        textField.isSecureTextEntry = true
@@ -66,9 +73,11 @@ final class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.layer.backgroundColor = #colorLiteral(red: 0, green: 0.4780646563, blue: 0.9985368848, alpha: 1)
-        button.layer.cornerRadius = 16
-//        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(logInButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -121,9 +130,9 @@ final class LogInViewController: UIViewController {
             
         ])
         
-        
-        
     }
-
     
 }
+
+
+
