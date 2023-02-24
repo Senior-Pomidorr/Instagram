@@ -8,20 +8,9 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    
-    @objc private func actionButton() {
-        statusLabel.text = statusText
-        print (statusLabel.text ?? "nil")
-    }
-    
+
     private var statusText = ""
-    
-    @objc private func statusLabelChanged(_ textField: UITextField) {
-        if let text = statusTextField.text {
-            statusText = text
-        }
-    }
-    
+  
     private var profileView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +98,17 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc private func actionButton() {
+        statusLabel.text = statusText
+        print (statusLabel.text ?? "nil")
+    }
+    
+    @objc private func statusLabelChanged(_ textField: UITextField) {
+        if let text = statusTextField.text {
+            statusText = text
+        }
+    }
+    
     func customizeViews() {
         backgroundColor = .white
         addSubview(profileView)
@@ -153,12 +153,8 @@ class ProfileHeaderView: UIView {
             changeTitleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             changeTitleButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             changeTitleButton.heightAnchor.constraint(equalToConstant: 50),
-            
-           ])
-         
+        ])
     }
-
-    
 }
 
 
