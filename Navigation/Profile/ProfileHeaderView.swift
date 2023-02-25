@@ -8,7 +8,9 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    
+
+    private var statusText = ""
+  
     private var profileView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +19,7 @@ class ProfileHeaderView: UIView {
     }()
 
     
-    private let setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Show status", for: .normal)
@@ -28,6 +30,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
+        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return button
     }()
     
@@ -61,7 +64,7 @@ class ProfileHeaderView: UIView {
         return statusLabel
     }()
     
-    var statusTextField: UITextField = {
+    lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.text = "Waiting for something"
@@ -70,7 +73,9 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 16
         textField.layer.backgroundColor = UIColor.white.cgColor
         textField.layer.cornerRadius = 12
+        textField.indent(size: 10)
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.addTarget(self, action: #selector(statusLabelChanged), for: .editingChanged)
         return textField
     }()
 
@@ -83,11 +88,26 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    func button() -> UIButton {
-        setStatusButton
+    init() {
+        super.init(frame: .zero)
+        customizeViews()
+        layoutSubviews()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
+    @objc private func actionButton() {
+        statusLabel.text = statusText
+        print (statusLabel.text ?? "nil")
+    }
+    
+    @objc private func statusLabelChanged(_ textField: UITextField) {
+        if let text = statusTextField.text {
+            statusText = text
+        }
+    }
     
     func customizeViews() {
         backgroundColor = .white
@@ -133,23 +153,8 @@ class ProfileHeaderView: UIView {
             changeTitleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             changeTitleButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             changeTitleButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            
-           ])
-         
+        ])
     }
-
-
-    init() {
-        super.init(frame: .zero)
-        customizeViews()
-        layoutSubviews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 

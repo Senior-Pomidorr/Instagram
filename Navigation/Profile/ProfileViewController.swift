@@ -14,7 +14,6 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Profile"
-        buttonTarget()
         
        
     }
@@ -24,16 +23,7 @@ final class ProfileViewController: UIViewController {
         profileView.frame = view.frame
         view.addSubview(profileView)
     }
-    
- 
 
-    func buttonTarget() {
-        profileView.button().addTarget(self, action: #selector(actionButton), for: .touchUpInside)
-    }
-    
-    @objc func actionButton() {
-        print("Статус")
-    }
     
     
 

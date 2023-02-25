@@ -11,7 +11,8 @@ class UiTabBarController: UITabBarController {
     
     private let firstVC = UINavigationController(rootViewController: FeedViewController())
     private let secondVC = UINavigationController(rootViewController: ProfileViewController())
-    private let thirdVC = UINavigationController(rootViewController: PostViewController())
+    private let thirdVC = UINavigationController(rootViewController: LogInViewController())
+
     
     
     override func viewDidLoad() {
@@ -23,24 +24,17 @@ class UiTabBarController: UITabBarController {
     
     private func setupControllers() {
         self.tabBar.backgroundColor = .white
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.navigationBar.barTintColor = .cyan
-//        self.navigationController?.navigationBar.tintColor = .white
 
         firstVC.tabBarItem.title = "Лента"
         firstVC.tabBarItem.image = UIImage(systemName: "house.fill")
         
-        secondVC.tabBarItem.title = "Профиль"
-        secondVC.tabBarItem.image = UIImage(systemName: "person.fill")
-        
-        thirdVC.tabBarItem.title = "Post"
-        secondVC.tabBarItem.image = UIImage(systemName: "square.and.pencil")
-        
-        
-        viewControllers = [firstVC, secondVC]
+        thirdVC.tabBarItem.title = "Профиль"
+        thirdVC.tabBarItem.image = UIImage(systemName: "person.fill")
+    
+        viewControllers = [firstVC, thirdVC]
+        thirdVC.navigationController?.setNavigationBarHidden(true, animated: true)
     
     }
-    
 }
 
 
