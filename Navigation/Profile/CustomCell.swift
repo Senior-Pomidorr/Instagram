@@ -16,29 +16,47 @@ class CustomCellTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let carImageView: UIImageView = {
+    private let ImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .red
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let carText: UILabel = {
+    private let authorName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .systemGray4
+        label.text = "Kanye West"
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .black
+        label.numberOfLines = 2
         return label
     }()
     
     private let descriptionText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .systemGray4
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 0
+        label.textColor = .systemGray
         return label
     }()
+    
+    private let likes: UILabel = {
+        let likes = UILabel()
+        likes.translatesAutoresizingMaskIntoConstraints = false
+        likes.font = .systemFont(ofSize: 16, weight: .regular)
+        return likes
+    }()
+    
+    private let views: UILabel = {
+        let views = UILabel()
+        views.translatesAutoresizingMaskIntoConstraints = false
+        views.font = .systemFont(ofSize: 16, weight: .regular)
+        return views
+    }()
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,57 +69,60 @@ class CustomCellTableViewCell: UITableViewCell {
     }
     
     func setupCell(model: ProfilePosts) {
-        carImageView.image = model.image
-        carText.text = model.author
+        ImageView.image = model.image
+        authorName.text = model.author
         descriptionText.text = model.description
+        likes.text = "Likes: \(String(model.likes))"
+        views.text = "Views: \(String(model.views))"
         
     }
     
     private func customizeCell() {
-        contentWhiteView.backgroundColor = .systemGray6
-        contentWhiteView.layer.cornerRadius = 10
-        contentWhiteView.layer.borderWidth = 2
+        contentWhiteView.backgroundColor = .white
         contentWhiteView.layer.borderColor = UIColor.black.cgColor
     }
     
     private func layout() {
-//        contentView.addSubview(contentWhiteView)
-        [contentWhiteView, carImageView, carText, descriptionText].forEach { contentView.addSubview($0) }
-//        [contentWhiteView, carImageView, carText].forEach { contentView.addSubview($0) }
-        
-        let heightView: CGFloat = 100
-        let viewInset: CGFloat = 8
-        let imageInset: CGFloat = 10
+        [contentWhiteView, ImageView, authorName, descriptionText, likes, views].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: viewInset),
-            contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: viewInset),
-            contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -viewInset),
-            contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -viewInset),
-            /// 1 убрать высоту
-//            contentWhiteView.heightAnchor.constraint(equalToConstant: heightView)
+            contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            carImageView.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: imageInset),
-            carImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: imageInset),
-//            carImageView.heightAnchor.constraint(equalToConstant: heightView - imageInset * 2),
-            carImageView.widthAnchor.constraint(equalToConstant: heightView - imageInset * 2),
-            /// 2 добавить нижний констрейнт
-            carImageView.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -imageInset)
+            authorName.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
+            authorName.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
         ])
         
         NSLayoutConstraint.activate([
-            carText.topAnchor.constraint(equalTo: carImageView.topAnchor),
-            carText.leadingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant: 16),
-            carText.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16)
+            ImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
+            ImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 0),
+            ImageView.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: 0),
+            ImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+            ImageView.widthAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
+        ])
+
+        
+        NSLayoutConstraint.activate([
+            descriptionText.topAnchor.constraint(equalTo: ImageView.bottomAnchor, constant: 10),
+            descriptionText.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
+            descriptionText.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
         ])
         
         NSLayoutConstraint.activate([
-            descriptionText.topAnchor.constraint(equalTo: carText.bottomAnchor, constant: 10),
-            descriptionText.leadingAnchor.constraint(equalTo: carText.leadingAnchor),
-            descriptionText.trailingAnchor.constraint(equalTo: carText.trailingAnchor),
-            descriptionText.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -imageInset)
+            likes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
+            likes.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
+            likes.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
+            views.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
+            views.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16)
+           
         ])
     }
 }

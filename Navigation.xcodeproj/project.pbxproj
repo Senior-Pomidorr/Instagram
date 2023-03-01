@@ -91,8 +91,8 @@
 				0D3659962997C0E0008C47CC /* UiTabBarController.swift */,
 				0DACF3CE29ABC9EB00507C01 /* Model */,
 				0D57880429A0CEF7008036D7 /* Profile */,
-				0D3659922996F954008C47CC /* FeedViewController.swift */,
-				0D365998299913F0008C47CC /* PostViewController.swift */,
+				0DACF3D829AE1E4100507C01 /* Feed */,
+				0DACF3D929AE1E4B00507C01 /* Post */,
 				0D15E035299E481E000BBBD9 /* Resources */,
 			);
 			path = Navigation;
@@ -113,7 +113,7 @@
 				0D3659942996F967008C47CC /* ProfileViewController.swift */,
 				0DACF3D129AD2F4800507C01 /* CustomCell.swift */,
 				0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */,
-				0DACF3CC29A8B24500507C01 /* LogInViewController.swift */,
+				0DACF3D729AE1E0200507C01 /* Login */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -124,6 +124,30 @@
 				0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0DACF3D729AE1E0200507C01 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0DACF3CC29A8B24500507C01 /* LogInViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0DACF3D829AE1E4100507C01 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				0D3659922996F954008C47CC /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		0DACF3D929AE1E4B00507C01 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				0D365998299913F0008C47CC /* PostViewController.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
