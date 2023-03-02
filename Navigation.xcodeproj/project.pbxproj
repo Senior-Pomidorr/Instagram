@@ -19,7 +19,7 @@
 		0D57880629A0F974008036D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57880529A0F974008036D7 /* Post.swift */; };
 		0D796DEB29A5423F00D24240 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D796DEA29A5423F00D24240 /* Extensions.swift */; };
 		0DACF3CD29A8B24500507C01 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3CC29A8B24500507C01 /* LogInViewController.swift */; };
-		0DACF3D229AD2F4800507C01 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D129AD2F4800507C01 /* CustomCell.swift */; };
+		0DACF3D229AD2F4800507C01 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */; };
 		0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */; };
 		0DACF3D629AD3E0B00507C01 /* UiView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D529AD3E0B00507C01 /* UiView Extension.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		0D57880529A0F974008036D7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0D796DEA29A5423F00D24240 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0DACF3CC29A8B24500507C01 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		0DACF3D129AD2F4800507C01 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePosts.swift; sourceTree = "<group>"; };
 		0DACF3D529AD3E0B00507C01 /* UiView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +91,7 @@
 				0D3659962997C0E0008C47CC /* UiTabBarController.swift */,
 				0DACF3CE29ABC9EB00507C01 /* Model */,
 				0D57880429A0CEF7008036D7 /* Profile */,
+				0DACF3D729AE1E0200507C01 /* Login */,
 				0DACF3D829AE1E4100507C01 /* Feed */,
 				0DACF3D929AE1E4B00507C01 /* Post */,
 				0D15E035299E481E000BBBD9 /* Resources */,
@@ -111,9 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				0D3659942996F967008C47CC /* ProfileViewController.swift */,
-				0DACF3D129AD2F4800507C01 /* CustomCell.swift */,
+				0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */,
 				0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */,
-				0DACF3D729AE1E0200507C01 /* Login */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 				0D57880629A0F974008036D7 /* Post.swift in Sources */,
 				0D36595E29950EA7008C47CC /* SceneDelegate.swift in Sources */,
 				0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */,
-				0DACF3D229AD2F4800507C01 /* CustomCell.swift in Sources */,
+				0DACF3D229AD2F4800507C01 /* PostTableViewCell.swift in Sources */,
 				0D57880329A0CEDE008036D7 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

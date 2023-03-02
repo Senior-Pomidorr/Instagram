@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private var profilePosts: [[ProfilePosts]] = ProfilePosts.showPosts()
+    private var profilePosts = ProfilePosts.showPosts()
     
     private let profileView = ProfileHeaderView()
     
@@ -18,7 +18,7 @@ final class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(CustomCellTableViewCell.self, forCellReuseIdentifier: CustomCellTableViewCell.identifier)
+        tableView.register( PostTableViewCell.self, forCellReuseIdentifier:  PostTableViewCell.identifier)
         return tableView
     }()
     
@@ -50,12 +50,12 @@ final class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profilePosts[section].count
+        profilePosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellTableViewCell.identifier, for: indexPath) as! CustomCellTableViewCell
-        cell.setupCell(model: profilePosts[indexPath.section][indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier:  PostTableViewCell.identifier, for: indexPath) as!  PostTableViewCell
+        cell.setupCell(model: profilePosts[indexPath.row])
         return cell
     }
     
@@ -71,9 +71,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
            return 220
        }
-    
-  
-
 }
 
     

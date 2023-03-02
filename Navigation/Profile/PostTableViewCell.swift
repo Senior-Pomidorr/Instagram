@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCellTableViewCell: UITableViewCell {
+class  PostTableViewCell: UITableViewCell {
     
     private let contentWhiteView: UIView = {
         let view = UIView()
@@ -90,39 +90,27 @@ class CustomCellTableViewCell: UITableViewCell {
             contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
         
-        NSLayoutConstraint.activate([
             authorName.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
             authorName.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
-        ])
         
-        NSLayoutConstraint.activate([
             ImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
             ImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 0),
             ImageView.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: 0),
             ImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
             ImageView.widthAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
-        ])
-
-        
-        NSLayoutConstraint.activate([
+       
             descriptionText.topAnchor.constraint(equalTo: ImageView.bottomAnchor, constant: 10),
             descriptionText.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
             descriptionText.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
-        ])
         
-        NSLayoutConstraint.activate([
             likes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             likes.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
-            likes.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16)
-        ])
-        
-        NSLayoutConstraint.activate([
+            likes.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16),
+    
             views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             views.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
             views.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16)
-           
         ])
     }
 }
