@@ -78,7 +78,6 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         cell.setupCell(photo: photoCels[indexPath.item])
         return cell
     }
-    
 }
 
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
