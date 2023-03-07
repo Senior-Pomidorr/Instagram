@@ -8,7 +8,7 @@
 import UIKit
 
 enum Picture {
-    static var picturePhoto = UIImage(named: "kanye west")
+    static var picturePhoto = UIImage(named: "16")
     static var logo = UIImage(named: "logo")
     static var bluePixel = UIImage(named: "blue_pixel")
 }

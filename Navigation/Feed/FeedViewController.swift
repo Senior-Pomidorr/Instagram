@@ -58,7 +58,7 @@ final class FeedViewController: UIViewController {
     private let myLabel: UILabel = {
         let myLabel = UILabel(frame: CGRect(x: 20, y: 150, width: 20, height: 40))
         return myLabel
-    } ()
+    }()
     
     init(textForLabel: String? = nil) {
         self.textForLabel = textForLabel

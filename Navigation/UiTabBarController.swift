@@ -33,7 +33,6 @@ class UiTabBarController: UITabBarController {
     
         viewControllers = [firstVC, thirdVC]
         thirdVC.navigationController?.setNavigationBarHidden(true, animated: true)
-    
     }
 }
 

@@ -14,10 +14,9 @@ class ProfileHeaderView: UIView {
     private var profileView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.layer.backgroundColor = #colorLiteral(red: 0.9490192533, green: 0.9490200877, blue: 0.9662286639, alpha: 1)
         return view
     }()
-
     
     private lazy var setStatusButton: UIButton = {
         var button = UIButton()
@@ -79,14 +78,6 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
-    private let changeTitleButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("changeTitle", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.backgroundColor = #colorLiteral(red: 0, green: 0.4780646563, blue: 0.9985368848, alpha: 1)
-        return button
-    }()
     
     init() {
         super.init(frame: .zero)
@@ -109,6 +100,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
+    
     func customizeViews() {
         backgroundColor = .white
         addSubview(profileView)
@@ -117,7 +109,6 @@ class ProfileHeaderView: UIView {
         profileView.addSubview(fullNameLabel)
         profileView.addSubview(statusTextField)
         profileView.addSubview(statusLabel)
-        profileView.addSubview(changeTitleButton)
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -148,11 +139,6 @@ class ProfileHeaderView: UIView {
             statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusTextField.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            changeTitleButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            changeTitleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            changeTitleButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            changeTitleButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }
