@@ -74,8 +74,13 @@ class  PostTableViewCell: UITableViewCell {
         descriptionText.text = model.description
         likes.text = "Likes: \(String(model.likes))"
         views.text = "Views: \(String(model.views))"
-        
     }
+    
+    override func prepareForReuse() {
+            super.prepareForReuse()
+            self.accessoryType = .none
+        }
+
     
     private func customizeCell() {
         contentWhiteView.backgroundColor = .white
