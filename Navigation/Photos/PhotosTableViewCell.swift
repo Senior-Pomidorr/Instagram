@@ -7,18 +7,21 @@
 
 import UIKit
 
-final class PhotosTableViewCell: UITableViewCell {
+class PhotosTableViewCell: UITableViewCell {
     
-    let photos = photoCels
+    private let photos = photoCels
     private let photosViewController = PhotosViewController()
     
-    var photosCollectionView: UICollectionView = {
+    lazy var photosCollectionView: UICollectionView = {
         var viewLayout = UICollectionViewFlowLayout()
         viewLayout.scrollDirection = .horizontal
         var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: viewLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.clipsToBounds = true
         collectionView.contentMode = .scaleAspectFill
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         return collectionView
     }()
     
@@ -30,7 +33,7 @@ final class PhotosTableViewCell: UITableViewCell {
         return titleLabel
     }()
     
-    var button: UIButton = {
+    lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.forward"), for: .normal)
@@ -41,9 +44,6 @@ final class PhotosTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
         layout()
-        photosCollectionView.dataSource = self
-        photosCollectionView.delegate = self
-        photosCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
     }
     
     required init?(coder: NSCoder) {
@@ -76,6 +76,8 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
         cell.setupCell(photo: photoCels[indexPath.item])
+        cell.layer.cornerRadius = 5
+        cell.layer.masksToBounds = true
         return cell
     }
 }
@@ -102,5 +104,4 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sideInset
     }
-    
 }

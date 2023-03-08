@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PhotoCollectionViewCell: UICollectionViewCell {
+class PhotoCollectionViewCell: UICollectionViewCell {
     
     private var imageView: UIImageView = {
         var imageView = UIImageView(frame: .zero)
@@ -33,7 +33,6 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     func setupCell(photo: PhotoPosts) {
         imageView.image = UIImage(named: photo.image)
-        imageView.layer.cornerRadius = 6
         }
     
     private func layout() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController {
+ class ProfileViewController: UIViewController {
     
     private var profilePosts = ProfilePosts.showPosts()
     private let profileView = ProfileHeaderView()
@@ -32,11 +32,10 @@ final class ProfileViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.backgroundColor = .white
-        loyoutTableView()
+        layoutTableView()
     }
-    
-    
-    private func loyoutTableView() {
+
+    private func layoutTableView() {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -59,20 +58,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier:  PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-            cell.button.addTarget(self, action: #selector(setupGoToGalleryButton), for: .touchUpInside)
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier:  PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+        cell.button.addTarget(self, action: #selector(setupGoToGalleryButton), for: .touchUpInside)
+        return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier:  PostTableViewCell.identifier, for: indexPath) as!  PostTableViewCell
         cell.setupCell(model: profilePosts[indexPath.item])
         return cell
     }
-    
-    @objc private func setupGoToGalleryButton() {
-        let photosVC = PhotosViewController()
-        navigationController?.pushViewController(photosVC, animated: true)
-    }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
@@ -88,10 +81,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return 220
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
+    func tapAction() {
             let viewController = PhotosViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        }
+    }
+    
+    @objc func setupGoToGalleryButton() {
+        let viewController = PhotosViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
+
+

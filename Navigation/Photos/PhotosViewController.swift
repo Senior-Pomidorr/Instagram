@@ -7,42 +7,33 @@
 
 import UIKit
 
-final class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController {
     
     private let photos = photoCels
     
-    private let collectionViewCell: UICollectionView = {
+    private lazy var collectionViewCell: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
-    
-    func setupCollectionView() {
-        collectionViewCell.dataSource = self
-        collectionViewCell.delegate = self
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        setupCollectionView()
         photosNavigationController()
     }
     
-    private func photosNavigationController() {
+    func photosNavigationController() {
         navigationController?.navigationBar.tintColor = UIColor.systemBlue
         navigationController?.navigationBar.isHidden = false
         title = "Photo Gallery"
         view.backgroundColor = .white
     }
-    
-    @objc private func setupGoToGalleryButton() {
-                let photosViewController = PhotosViewController()
-                navigationController?.pushViewController(photosViewController, animated: true)
-            }
     
     private func layout() {
         view.addSubview(collectionViewCell)
@@ -82,3 +73,4 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         UIEdgeInsets(top: sideInset, left: sideInset, bottom: sideInset, right: sideInset)
     }
 }
+

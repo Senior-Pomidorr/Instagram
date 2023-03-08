@@ -78,7 +78,6 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
-    
     init() {
         super.init(frame: .zero)
         customizeViews()
@@ -99,7 +98,6 @@ class ProfileHeaderView: UIView {
             statusText = text
         }
     }
-    
     
     func customizeViews() {
         backgroundColor = .white

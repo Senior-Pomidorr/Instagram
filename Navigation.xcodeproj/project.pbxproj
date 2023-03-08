@@ -123,7 +123,6 @@
 				0D3659942996F967008C47CC /* ProfileViewController.swift */,
 				0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */,
 				0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */,
-				0D9DA58B29B25C86001E6147 /* PhotosTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -131,6 +130,7 @@
 		0D9DA58E29B25DD0001E6147 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				0D9DA58B29B25C86001E6147 /* PhotosTableViewCell.swift */,
 				0D9DA58F29B2725C001E6147 /* PhotosViewController.swift */,
 				0D9DA59329B50722001E6147 /* PhotoCollectionViewCell.swift */,
 			);
