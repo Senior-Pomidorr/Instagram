@@ -57,7 +57,6 @@ class  PostTableViewCell: UITableViewCell {
         return views
     }()
     
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         customizeCell()
@@ -81,7 +80,6 @@ class  PostTableViewCell: UITableViewCell {
             self.accessoryType = .none
         }
 
-    
     private func customizeCell() {
         contentWhiteView.backgroundColor = .white
         contentWhiteView.layer.borderColor = UIColor.black.cgColor
