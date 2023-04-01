@@ -15,6 +15,8 @@
 		0D3659972997C0E0008C47CC /* UiTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3659962997C0E0008C47CC /* UiTabBarController.swift */; };
 		0D365999299913F0008C47CC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D365998299913F0008C47CC /* PostViewController.swift */; };
 		0D36599C299B9DA3008C47CC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D36599B299B9DA3008C47CC /* Info.swift */; };
+		0D374F0129D717E8003FF07D /* ShowPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D374F0029D717E8003FF07D /* ShowPostView.swift */; };
+		0D5070B929D88E6D00B9332C /* ShowPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5070B829D88E6C00B9332C /* ShowPostViewController.swift */; };
 		0D57880329A0CEDE008036D7 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */; };
 		0D57880629A0F974008036D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57880529A0F974008036D7 /* Post.swift */; };
 		0D796DEB29A5423F00D24240 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D796DEA29A5423F00D24240 /* Extensions.swift */; };
@@ -39,6 +41,8 @@
 		0D3659962997C0E0008C47CC /* UiTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTabBarController.swift; sourceTree = "<group>"; };
 		0D365998299913F0008C47CC /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		0D36599B299B9DA3008C47CC /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		0D374F0029D717E8003FF07D /* ShowPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostView.swift; sourceTree = "<group>"; };
+		0D5070B829D88E6C00B9332C /* ShowPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostViewController.swift; sourceTree = "<group>"; };
 		0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		0D57880529A0F974008036D7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0D796DEA29A5423F00D24240 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -117,12 +121,22 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		0D5070B729D88D2000B9332C /* ShowPost */ = {
+			isa = PBXGroup;
+			children = (
+				0D5070B829D88E6C00B9332C /* ShowPostViewController.swift */,
+				0D374F0029D717E8003FF07D /* ShowPostView.swift */,
+			);
+			path = ShowPost;
+			sourceTree = "<group>";
+		};
 		0D57880429A0CEF7008036D7 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				0D3659942996F967008C47CC /* ProfileViewController.swift */,
 				0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */,
 				0D57880229A0CEDE008036D7 /* ProfileHeaderView.swift */,
+				0D5070B729D88D2000B9332C /* ShowPost */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -252,7 +266,9 @@
 				0D36599C299B9DA3008C47CC /* Info.swift in Sources */,
 				0D796DEB29A5423F00D24240 /* Extensions.swift in Sources */,
 				0D3659972997C0E0008C47CC /* UiTabBarController.swift in Sources */,
+				0D5070B929D88E6D00B9332C /* ShowPostViewController.swift in Sources */,
 				0D57880629A0F974008036D7 /* Post.swift in Sources */,
+				0D374F0129D717E8003FF07D /* ShowPostView.swift in Sources */,
 				0D36595E29950EA7008C47CC /* SceneDelegate.swift in Sources */,
 				0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */,
 				0DACF3D229AD2F4800507C01 /* PostTableViewCell.swift in Sources */,

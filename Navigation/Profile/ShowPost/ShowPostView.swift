@@ -1,22 +1,18 @@
 //
-//  CustomCell.swift
+//  ViewControllerPos.swift
 //  Navigation
 //
-//  Created by Daniil Kulikovskiy on 27.02.2023.
+//  Created by Daniil Kulikovskiy on 31.03.2023.
 //
 
 import UIKit
 
-class  PostTableViewCell: UITableViewCell {
-    var profilePost: [ProfilePosts] = ProfilePosts.showPosts()
-    var post = [ProfilePosts]()
-    var indexPathCell = IndexPath()
+class ShowPostView: UIView {
     
     private let contentWhiteView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
     
@@ -26,6 +22,8 @@ class  PostTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
+        imageView.backgroundColor = .blue
+//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPost)))
         return imageView
     }()
     
@@ -53,7 +51,6 @@ class  PostTableViewCell: UITableViewCell {
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = .systemFont(ofSize: 16, weight: .regular)
         likes.isUserInteractionEnabled = true
-        likes.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLikes)))
         return likes
     }()
     
@@ -64,84 +61,33 @@ class  PostTableViewCell: UITableViewCell {
         return views
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
         layout()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(model: ProfilePosts) {
+
+    func setupView(model: ProfilePosts) {
         ImageView.image = model.image
         authorName.text = model.author
         descriptionText.text = model.description
         likes.text = "Likes: \(String(model.likes))"
         views.text = "Views: \(String(model.views))"
     }
-    
-    func setupCustomCell(index: IndexPath) {
-        indexPathCell = index
-        ImageView.image = profilePost[indexPathCell.row].image
-        authorName.text = profilePost[indexPathCell.row].author
-        descriptionText.text = profilePost[indexPathCell.row].description
-        likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
-        views.text = "Views: \(String(profilePost[indexPathCell.row].views))"
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.accessoryType = .none
-    }
-    
-//    private func customizeCell() {
-//        contentWhiteView.backgroundColor = .white
-//        contentWhiteView.layer.borderColor = UIColor.black.cgColor
-//    }
-    
-    
-    @objc func tapLikes(gesture: UITapGestureRecognizer) {
-        switch gesture.state {
-        case .ended:
-            print("Tap like")
-            gesture.numberOfTapsRequired = 1
-            profilePost[indexPathCell.row].likes += 1
-            likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
-            let heart = UIImageView(image: UIImage(systemName: "heart.fill"))
-            let size = ImageView.frame.size.width/3
-            heart.frame = CGRect(x: (ImageView.frame.size.width - size)/2 - 10,
-                                 y: (ImageView.frame.size.height - size)/2,
-                                 width: size + 20,
-                                 height: size)
-            heart.tintColor = .white
-            ImageView.addSubview(heart)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                UIView.animate(withDuration: 1, animations: {
-                    heart.alpha = 0
-                }, completion: { done in
-                    if done {
-                        heart.removeFromSuperview()
-                    }
-                })
-            })
-        
-        default:
-            break
-        }
-    }
-    
-    
+ 
     private func layout() {
-        [contentWhiteView, ImageView, authorName, descriptionText, likes, views].forEach { contentView.addSubview($0) }
+        [contentWhiteView, ImageView, authorName, descriptionText, likes, views].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
-            contentWhiteView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            contentWhiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentWhiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            contentWhiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentWhiteView.topAnchor.constraint(equalTo: topAnchor),
+            contentWhiteView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentWhiteView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contentWhiteView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             authorName.topAnchor.constraint(equalTo: contentWhiteView.topAnchor, constant: 16),
             authorName.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
@@ -149,20 +95,19 @@ class  PostTableViewCell: UITableViewCell {
             ImageView.topAnchor.constraint(equalTo: authorName.bottomAnchor, constant: 12),
             ImageView.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 0),
             ImageView.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: 0),
-            ImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+            ImageView.heightAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
             ImageView.widthAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
-            
+
             descriptionText.topAnchor.constraint(equalTo: ImageView.bottomAnchor, constant: 10),
             descriptionText.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
             descriptionText.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
-            
+
             likes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             likes.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
-            likes.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16),
-            
+
             views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             views.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
-            views.bottomAnchor.constraint(equalTo: contentWhiteView.bottomAnchor, constant: -16)
+
         ])
     }
 }
@@ -170,4 +115,8 @@ class  PostTableViewCell: UITableViewCell {
 
 
 
+
+
+    
+    
 

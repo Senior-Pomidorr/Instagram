@@ -75,7 +75,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
-        cell.setupCell(photo: photoCels[indexPath.item])
+        cell.setupCell(photo: photoCels[indexPath.row])
         cell.layer.cornerRadius = 5
         cell.layer.masksToBounds = true
         return cell

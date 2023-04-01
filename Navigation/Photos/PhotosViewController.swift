@@ -28,7 +28,7 @@ class PhotosViewController: UIViewController {
         photosNavigationController()
     }
     
-    func photosNavigationController() {
+    private func photosNavigationController() {
         navigationController?.navigationBar.tintColor = UIColor.systemBlue
         navigationController?.navigationBar.isHidden = false
         title = "Photo Gallery"
