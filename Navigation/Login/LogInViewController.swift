@@ -111,17 +111,17 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc private func logInButtonAction() -> Bool {
-//        if (textFieldLogin.text != nil) == validEmailAddressValidationResult && textFieldPassword.text == validPassword {
+        if (textFieldLogin.text != nil) == validEmailAddressValidationResult && textFieldPassword.text == validPassword {
             let profileView = ProfileViewController()
             navigationController?.pushViewController(profileView, animated: true)
-//        } else {
-//            print("inccorected Password")
-//            let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
-//            alert.addAction(UIKit.UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"), style: .default, handler: { _ in
-//                NSLog("The \"OK\" alert occured.")
-//            }))
-//            self.present(alert, animated: true, completion: nil)
-//        }
+        } else {
+            print("inccorected Password")
+            let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
+            alert.addAction(UIKit.UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         return true
     }
     
