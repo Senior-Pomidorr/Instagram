@@ -75,7 +75,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
-        cell.setupCell(photo: photoCels[indexPath.row])
+        cell.setupCell(photo: photos[indexPath.row])
         cell.layer.cornerRadius = 5
         cell.layer.masksToBounds = true
         return cell
@@ -85,22 +85,22 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     
     private var sideInset: CGFloat { return 8 }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = itemWidth(for: contentView.frame.width, spacing: 8.0)
         return CGSize(width: width, height: width)
     }
-
+    
     func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
         let totalSpasing: CGFloat = 4 * spacing + (4 - 3) * spacing
         let finalWidth = (width - totalSpasing) / 4
         return finalWidth
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sideInset
     }

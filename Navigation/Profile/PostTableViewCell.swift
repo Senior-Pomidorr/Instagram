@@ -7,10 +7,13 @@
 
 import UIKit
 
+
+
 class  PostTableViewCell: UITableViewCell {
+    
     var profilePost: [ProfilePosts] = ProfilePosts.showPosts()
-    var post = [ProfilePosts]()
-    var indexPathCell = IndexPath()
+    private var indexPathCell = IndexPath()
+    private var buttonWasPressed = false
     
     private let contentWhiteView: UIView = {
         let view = UIView()
@@ -57,7 +60,7 @@ class  PostTableViewCell: UITableViewCell {
         return likes
     }()
     
-    private let views: UILabel = {
+    lazy var views: UILabel = {
         let views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = .systemFont(ofSize: 16, weight: .regular)
@@ -67,28 +70,10 @@ class  PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupCell(model: ProfilePosts) {
-        ImageView.image = model.image
-        authorName.text = model.author
-        descriptionText.text = model.description
-        likes.text = "Likes: \(String(model.likes))"
-        views.text = "Views: \(String(model.views))"
-    }
-    
-    func setupCustomCell(index: IndexPath) {
-        indexPathCell = index
-        ImageView.image = profilePost[indexPathCell.row].image
-        authorName.text = profilePost[indexPathCell.row].author
-        descriptionText.text = profilePost[indexPathCell.row].description
-        likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
-        views.text = "Views: \(String(profilePost[indexPathCell.row].views))"
     }
     
     override func prepareForReuse() {
@@ -96,41 +81,55 @@ class  PostTableViewCell: UITableViewCell {
         self.accessoryType = .none
     }
     
-//    private func customizeCell() {
-//        contentWhiteView.backgroundColor = .white
-//        contentWhiteView.layer.borderColor = UIColor.black.cgColor
-//    }
-    
+    func setupCustomCell(with model: IndexPath) {
+        indexPathCell = model
+        ImageView.image = profilePost[indexPathCell.row].image
+        authorName.text = profilePost[indexPathCell.row].author 
+        descriptionText.text = profilePost[indexPathCell.row].description
+        likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
+        views.text = "Views: \(String(profilePost[indexPathCell.row].views))"
+    }
     
     @objc func tapLikes(gesture: UITapGestureRecognizer) {
-        switch gesture.state {
-        case .ended:
+        var post = ProfilePosts.showPosts()
+        if buttonWasPressed == false {
+            post[indexPathCell.row].likes += 1
+            post[indexPathCell.row].views += 1
             print("Tap like")
-            gesture.numberOfTapsRequired = 1
-            profilePost[indexPathCell.row].likes += 1
+            profilePost.remove(at: indexPathCell.row)
+            profilePost.insert(post[indexPathCell.row], at: indexPathCell.row)
             likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
-            let heart = UIImageView(image: UIImage(systemName: "heart.fill"))
-            let size = ImageView.frame.size.width/3
-            heart.frame = CGRect(x: (ImageView.frame.size.width - size)/2 - 10,
-                                 y: (ImageView.frame.size.height - size)/2,
-                                 width: size + 20,
-                                 height: size)
-            heart.tintColor = .white
-            ImageView.addSubview(heart)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                UIView.animate(withDuration: 1, animations: {
-                    heart.alpha = 0
-                }, completion: { done in
-                    if done {
-                        heart.removeFromSuperview()
-                    }
-                })
-            })
-        
-        default:
-            break
+            views.text = "Views: \(String(profilePost[indexPathCell.row].views))"
+            animationHeart()
+            buttonWasPressed = true
+        } else {
+            profilePost.remove(at: indexPathCell.row)
+            profilePost.insert(post[indexPathCell.row], at: indexPathCell.row)
+            likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
+            animationHeart()
+            buttonWasPressed = false
         }
+    }
+    
+    private func animationHeart() {
+        let heart = UIImageView(image: UIImage(systemName: "heart.fill"))
+        let size = ImageView.frame.size.width/3
+        heart.frame = CGRect(x: (ImageView.frame.size.width - size)/2 - 10,
+                             y: (ImageView.frame.size.height - size)/2,
+                             width: size + 20,
+                             height: size)
+        heart.tintColor = .white
+        ImageView.addSubview(heart)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+            UIView.animate(withDuration: 1, animations: {
+                heart.alpha = 0
+            }, completion: { done in
+                if done {
+                    heart.removeFromSuperview()
+                }
+            })
+        })
     }
     
     

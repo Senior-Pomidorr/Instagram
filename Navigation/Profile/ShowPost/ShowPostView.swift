@@ -23,7 +23,6 @@ class ShowPostView: UIView {
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = .blue
-//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPost)))
         return imageView
     }()
     
@@ -40,25 +39,10 @@ class ShowPostView: UIView {
     private let descriptionText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 0
         label.textColor = .systemGray
         return label
-    }()
-    
-    private lazy var likes: UILabel = {
-        let likes = UILabel()
-        likes.translatesAutoresizingMaskIntoConstraints = false
-        likes.font = .systemFont(ofSize: 16, weight: .regular)
-        likes.isUserInteractionEnabled = true
-        return likes
-    }()
-    
-    private let views: UILabel = {
-        let views = UILabel()
-        views.translatesAutoresizingMaskIntoConstraints = false
-        views.font = .systemFont(ofSize: 16, weight: .regular)
-        return views
     }()
     
     override init(frame: CGRect) {
@@ -71,17 +55,14 @@ class ShowPostView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
     func setupView(model: ProfilePosts) {
         ImageView.image = model.image
         authorName.text = model.author
         descriptionText.text = model.description
-        likes.text = "Likes: \(String(model.likes))"
-        views.text = "Views: \(String(model.views))"
     }
- 
+    
     private func layout() {
-        [contentWhiteView, ImageView, authorName, descriptionText, likes, views].forEach { addSubview($0) }
+        [contentWhiteView, ImageView, authorName, descriptionText].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
             contentWhiteView.topAnchor.constraint(equalTo: topAnchor),
@@ -97,17 +78,11 @@ class ShowPostView: UIView {
             ImageView.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: 0),
             ImageView.heightAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
             ImageView.widthAnchor.constraint(equalTo: contentWhiteView.widthAnchor),
-
+            
             descriptionText.topAnchor.constraint(equalTo: ImageView.bottomAnchor, constant: 10),
             descriptionText.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
             descriptionText.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
-
-            likes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            likes.leadingAnchor.constraint(equalTo: contentWhiteView.leadingAnchor, constant: 16),
-
-            views.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            views.trailingAnchor.constraint(equalTo: contentWhiteView.trailingAnchor, constant: -16),
-
+            
         ])
     }
 }
@@ -117,6 +92,6 @@ class ShowPostView: UIView {
 
 
 
-    
-    
+
+
 

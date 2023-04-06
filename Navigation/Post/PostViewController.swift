@@ -24,7 +24,7 @@ class PostViewController: UIViewController {
         self.navigationItem.title = "Your Post"
         setupButtonInfo()
     }
-
+    
     private func setupButtonInfo() {
         let button = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(actionTabInfo))
         navigationItem.rightBarButtonItem = button

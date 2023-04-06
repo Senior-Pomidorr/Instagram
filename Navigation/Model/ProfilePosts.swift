@@ -25,8 +25,10 @@ struct ProfilePosts {
         post.append(ProfilePosts(author: "Kanye West", description: "Love your haters - they're your biggest fans.", image: UIImage(named:"1185994745")!, likes: 403456, views: 947329))
         post.append(ProfilePosts(author: "Kanye West", description: "“Everything I'm not makes me everything I am.”", image: UIImage(named:"0x0")!, likes: 853456, views: 1620572))
         post.append(ProfilePosts(author: "Kanye West", description: "At the best of times...", image: UIImage(named:"kidcudi")!, likes: 53456, views: 320572))
-        print(post)
         return post
     }
 }
+
+
+
 

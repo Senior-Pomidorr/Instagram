@@ -14,3 +14,4 @@ extension UIView {
 }
 
 let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+

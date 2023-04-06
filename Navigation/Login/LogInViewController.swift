@@ -7,9 +7,11 @@
 
 import UIKit
 
-final class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private let notifiacation = NotificationCenter.default
+    let validEmailAddressValidationResult = isValidEmailAddress(emailAddressString: "kanye@gmail.com")
+    let validPassword = "qwerty"
     
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,14 +111,14 @@ final class LogInViewController: UIViewController {
     
     
     @objc private func logInButtonAction() -> Bool {
-//        if (textFieldLogin.text != nil) == "kanye@gmail.com".isValidEmail && textFieldPassword.text == "kanyeQwerty" {
+//        if (textFieldLogin.text != nil) == validEmailAddressValidationResult && textFieldPassword.text == validPassword {
             let profileView = ProfileViewController()
             navigationController?.pushViewController(profileView, animated: true)
 //        } else {
 //            print("inccorected Password")
 //            let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
 //            alert.addAction(UIKit.UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
+//                NSLog("The \"OK\" alert occured.")
 //            }))
 //            self.present(alert, animated: true, completion: nil)
 //        }
@@ -135,7 +137,6 @@ final class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
-    //Анимация поддергивания login, password.
     private func shakeAnimation() {
         let animationText = CABasicAnimation(keyPath: "position")
         animationText.duration = 0.07
@@ -221,10 +222,10 @@ final class LogInViewController: UIViewController {
     }
 }
 
-extension LogInViewController: UITextFieldDelegate {
+extension LogInViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            shakeAnimation()
+        shakeAnimation()
         if textField == textFieldLogin {
             textFieldPassword.becomeFirstResponder()
         } else {

@@ -8,14 +8,12 @@
 import UIKit
 
 class ShowPostViewController: UIViewController {
-
+    
     private var showPostView = ShowPostView()
     private let model: ProfilePosts
     private var indexPath: IndexPath
     
-    
-    init( model: ProfilePosts, indexPath: IndexPath
-    ) {
+    init( model: ProfilePosts, indexPath: IndexPath) {
         self.model = model
         self.indexPath = indexPath
         super.init(nibName: nil, bundle: nil)
@@ -30,9 +28,8 @@ class ShowPostViewController: UIViewController {
         view = showPostView
         showPostView.setupView(model: model)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }

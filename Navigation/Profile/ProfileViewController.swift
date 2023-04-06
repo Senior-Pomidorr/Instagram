@@ -7,11 +7,12 @@
 
 import UIKit
 
+
 class ProfileViewController: UIViewController {
     
     private var profilePosts = ProfilePosts.showPosts()
     private let headerView = ProfileHeaderView()
-    private let photos = photoCels
+    private var indexPathCell = IndexPath()
     private var initialImageRect: CGRect = .zero
     
     private lazy var tableView: UITableView = {
@@ -55,11 +56,6 @@ class ProfileViewController: UIViewController {
         layoutTableView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        view.backgroundColor = .white
-    }
-    
     private func layoutTableView() {
         view.addSubview(tableView)
         
@@ -82,8 +78,7 @@ class ProfileViewController: UIViewController {
                                           height: imageFrame.height)
         
         UIView.animate(withDuration: 0.3) {
-            self.animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width,
-                                                        height: UIScreen.main.bounds.width)
+            self.animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             self.animatingImageView.center = self.view.center
             self.animatingImageView.layer.cornerRadius = 0
             self.navigationController?.navigationBar.isHidden = true
@@ -95,7 +90,7 @@ class ProfileViewController: UIViewController {
     @objc func closeAnimation() {
         closeButton.removeFromSuperview()
         whiteView.removeFromSuperview()
-    
+        
         UIView.animate(withDuration: 0.3) {
             self.animatingImageView.frame = self.initialImageRect
             self.animatingImageView.layer.cornerRadius = 50
@@ -106,25 +101,32 @@ class ProfileViewController: UIViewController {
     }
 }
 
-            
+
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profilePosts.count
+        profilePosts.count
     }
-
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:  PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+        cell.button.addTarget(self, action: #selector(setupGoToGalleryButton), for: .touchUpInside)
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier:  PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-            cell.button.addTarget(self, action: #selector(setupGoToGalleryButton), for: .touchUpInside)
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:  PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        if indexPath.row >= 1 {
-            cell.setupCustomCell(index: indexPath)
+        let cellPost = tableView.dequeueReusableCell(withIdentifier:  PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        cellPost.setupCustomCell(with: indexPath)
+        if indexPath.row == 1 {
         }
-        return cell
+        return cellPost
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,10 +151,21 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             let viewController = PhotosViewController()
             navigationController?.pushViewController(viewController, animated: true)
-            
         } else {
             let showPostVC = ShowPostViewController(model: profilePosts[indexPath.row], indexPath: indexPath)
             present(showPostVC, animated: true)
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            profilePosts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -163,9 +176,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ProfileViewController: HeaderDelegate {
-    func myTapForStudents() {
-        print("test delegate")
-    }
     
     func tapImage(_ image: UIImage?, imageRect: CGRect) {
         let headerFrame = headerView.frame
@@ -178,3 +188,5 @@ extension ProfileViewController: HeaderDelegate {
         animateImage(image, imageFrame: initialImageRect)
     }
 }
+
+

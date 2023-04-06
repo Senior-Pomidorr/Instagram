@@ -9,7 +9,6 @@ import UIKit
 
 protocol HeaderDelegate: AnyObject {
     func tapImage(_ image: UIImage?, imageRect: CGRect)
-    func myTapForStudents() -> Void
 }
 
 class ProfileHeaderView: UIView {
@@ -39,7 +38,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-     private lazy var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         var photo = UIImageView()
         photo.clipsToBounds = true
         photo.translatesAutoresizingMaskIntoConstraints = false
@@ -96,13 +95,13 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func actionButton() {
-            statusLabel.text = statusText
-            print (statusLabel.text ?? "nil")
-            if statusTextField.text!.isEmpty {
-                AnimationButtonStatus()
-                statusTextField.placeholder = "Status is a clear"
-            }
+        statusLabel.text = statusText
+        print (statusLabel.text ?? "nil")
+        if statusTextField.text!.isEmpty {
+            AnimationButtonStatus()
+            statusTextField.placeholder = "Status is a clear"
         }
+    }
     
     @objc private func statusLabelChanged(_ textField: UITextField) {
         if let text = statusTextField.text {
@@ -110,17 +109,8 @@ class ProfileHeaderView: UIView {
         }
     }
     
-//    @objc private func tapAction() {
-//        UIView.animate(withDuration: 0.5) {
-//            self.avatarImageView.layer.borderWidth = 0
-//            self.avatarImageView.layer.borderWidth = 0
-//            self.layoutIfNeeded()
-//        }
-//    }
-    
     @objc private func tapGesture() {
         myDelegate?.tapImage(avatarImageView.image, imageRect: avatarImageView.frame)
-        myDelegate?.myTapForStudents()
     }
     
     private func AnimationButtonStatus() {
