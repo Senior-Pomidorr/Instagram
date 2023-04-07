@@ -10,8 +10,6 @@ import UIKit
 final class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private let notifiacation = NotificationCenter.default
-    let validEmailAddressValidationResult = isValidEmailAddress(emailAddressString: "kanye@gmail.com")
-    let validPassword = "qwerty"
     
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +41,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.layer.backgroundColor = UIColor.systemGray6.cgColor
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
+        textField.text = ""
         textField.indent(size: 10)
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -57,6 +56,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.isSecureTextEntry = true
         textField.font = .systemFont(ofSize: 16)
         textField.textColor = UIColor.tintColor
+        textField.text = ""
         textField.autocapitalizationType = .none
         textField.layer.backgroundColor = UIColor.systemGray6.cgColor
         textField.layer.cornerRadius = 10
@@ -111,18 +111,20 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc private func logInButtonAction() -> Bool {
-        if (textFieldLogin.text != nil) == validEmailAddressValidationResult && textFieldPassword.text == validPassword {
-            let profileView = ProfileViewController()
-            navigationController?.pushViewController(profileView, animated: true)
-        } else {
-            print("inccorected Password")
-            let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
-            alert.addAction(UIKit.UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"), style: .default, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-            }))
-            self.present(alert, animated: true, completion: nil)
+        if isValidEmailAddress(emailAddressString: sourceMail) {
+            if textFieldLogin.text == sourceMail && textFieldPassword.text == password {
+                let profileView = ProfileViewController()
+                navigationController?.pushViewController(profileView, animated: true)
+            } else {
+                print("inccorected Password")
+                let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
+                alert.addAction(UIKit.UIAlertAction(title: NSLocalizedString("Try again", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        return true
+            return true
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -244,5 +246,7 @@ extension LogInViewController {
         return false
     }
 }
+
+
 
 
