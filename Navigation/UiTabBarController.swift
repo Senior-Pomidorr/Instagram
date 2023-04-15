@@ -10,17 +10,12 @@ import UIKit
 class UiTabBarController: UITabBarController {
     
     private let firstVC = UINavigationController(rootViewController: FeedViewController())
-    private let secondVC = UINavigationController(rootViewController: ProfileViewController())
     private let thirdVC = UINavigationController(rootViewController: LogInViewController())
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
     }
-    
-   
     
     private func setupControllers() {
         self.tabBar.backgroundColor = .white

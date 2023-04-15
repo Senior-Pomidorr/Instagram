@@ -8,7 +8,7 @@
 import UIKit
 
 struct PhotoPosts {
-        var image: String
+    var image: String
 }
 
 let photoCels: [PhotoPosts] = [PhotoPosts(image: "1"),

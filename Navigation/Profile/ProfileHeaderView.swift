@@ -7,10 +7,15 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+protocol HeaderDelegate: AnyObject {
+    func tapImage(_ image: UIImage?, imageRect: CGRect)
+}
 
+class ProfileHeaderView: UIView {
+    
+    weak var myDelegate: HeaderDelegate?
     private var statusText = ""
-  
+    
     private var profileView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +38,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private let avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         var photo = UIImageView()
         photo.clipsToBounds = true
         photo.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +47,8 @@ class ProfileHeaderView: UIView {
         photo.layer.cornerRadius = 50
         photo.layer.borderWidth = 3
         photo.layer.borderColor = UIColor.white.cgColor
+        photo.isUserInteractionEnabled = true
+        photo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGesture)))
         return photo
     }()
     
@@ -57,7 +64,7 @@ class ProfileHeaderView: UIView {
     var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.text = "Waiting for something"
+        statusLabel.text = "Preparing a new album"
         statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
         return statusLabel
@@ -66,10 +73,10 @@ class ProfileHeaderView: UIView {
     lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.text = "Waiting for something"
+        textField.placeholder = "Write something"
+        textField.delegate = self
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
-        textField.layer.cornerRadius = 16
         textField.layer.backgroundColor = UIColor.white.cgColor
         textField.layer.cornerRadius = 12
         textField.indent(size: 10)
@@ -77,11 +84,10 @@ class ProfileHeaderView: UIView {
         textField.addTarget(self, action: #selector(statusLabelChanged), for: .editingChanged)
         return textField
     }()
-
-    init() {
-        super.init(frame: .zero)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         customizeViews()
-        layoutSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +97,10 @@ class ProfileHeaderView: UIView {
     @objc private func actionButton() {
         statusLabel.text = statusText
         print (statusLabel.text ?? "nil")
+        if statusTextField.text!.isEmpty {
+            AnimationButtonStatus()
+            statusTextField.placeholder = "Status is a clear"
+        }
     }
     
     @objc private func statusLabelChanged(_ textField: UITextField) {
@@ -99,14 +109,28 @@ class ProfileHeaderView: UIView {
         }
     }
     
+    @objc private func tapGesture() {
+        myDelegate?.tapImage(avatarImageView.image, imageRect: avatarImageView.frame)
+    }
+    
+    private func AnimationButtonStatus() {
+        let animationText = CABasicAnimation(keyPath: "position")
+        animationText.duration = 0.09
+        animationText.repeatCount = 4
+        animationText.autoreverses = true
+        animationText.fromValue = NSValue(cgPoint: CGPoint(x: statusTextField.center.x, y: statusTextField.center.y + 3))
+        animationText.toValue = NSValue(cgPoint: CGPoint(x: statusTextField.center.x, y: statusTextField.center.y - 3))
+        statusTextField.layer.add(animationText, forKey: "position")
+    }
+    
     func customizeViews() {
         backgroundColor = .white
         addSubview(profileView)
         profileView.addSubview(setStatusButton)
-        profileView.addSubview(avatarImageView)
         profileView.addSubview(fullNameLabel)
         profileView.addSubview(statusTextField)
         profileView.addSubview(statusLabel)
+        profileView.addSubview(avatarImageView)
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -124,7 +148,7 @@ class ProfileHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -16),
             setStatusButton.widthAnchor.constraint(equalToConstant: 360),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-        
+            
             fullNameLabel.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 26),
@@ -139,6 +163,15 @@ class ProfileHeaderView: UIView {
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
+    
 }
 
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if statusTextField.text == nil {
+        }
+        return true
+    }
+}
 

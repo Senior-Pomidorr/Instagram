@@ -7,43 +7,58 @@
 
 import UIKit
 
+protocol CellDelegate: AnyObject {
+    func didTapImageInCell(_ image: UIImage?, imageRect: CGRect, indexPath: IndexPath)
+}
+
 class PhotoCollectionViewCell: UICollectionViewCell {
     
-    private var imageView: UIImageView = {
-        var imageView = UIImageView(frame: .zero)
+    weak var cellDelegate: CellDelegate?
+    private var indexPathCell = IndexPath()
+    
+    lazy var imageViewCell: UIImageView = {
+        var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateImageCell)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
-        }
-
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-   
-    override func prepareForReuse() {
-         super.prepareForReuse()
-        imageView.image = nil
-     }
     
     func setupCell(photo: PhotoPosts) {
-        imageView.image = UIImage(named: photo.image)
-        }
+        imageViewCell.image = UIImage(named: photo.image)
+    }
+    
+    func setIndexPath(_ indexPath: IndexPath) {
+        indexPathCell = indexPath
+    }
+    
+    @objc func animateImageCell() {
+        cellDelegate?.didTapImageInCell(imageViewCell.image, imageRect: imageViewCell.frame, indexPath: indexPathCell)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageViewCell.image = nil
+    }
     
     private func layout() {
-        contentView.addSubview(imageView)
+        contentView.addSubview(imageViewCell)
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            imageViewCell.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageViewCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
-
-

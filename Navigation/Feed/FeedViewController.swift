@@ -27,7 +27,7 @@ final class FeedViewController: UIViewController {
         view.addSubview(buttonTwo)
         loyout()
     }
-
+    
     
     private let stackView: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
