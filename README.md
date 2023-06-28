@@ -1,4 +1,4 @@
 # ios-homeworks
 
-@mail or phone Login: kanye@gmail.com   
-password Login :qwerty
+Login: kanye@gmail.com   
+Password: qwerty
