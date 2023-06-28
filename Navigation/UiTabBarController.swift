@@ -9,34 +9,26 @@ import UIKit
 
 class UiTabBarController: UITabBarController {
     
-    private let firstVC = FeedViewController()
-    private let secondVC = ProfileViewController()
-    
+    private let firstVC = UINavigationController(rootViewController: FeedViewController())
+    private let thirdVC = UINavigationController(rootViewController: LogInViewController())
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
     }
     
     private func setupControllers() {
-        let navigationController = UINavigationController(rootViewController: firstVC)
+        self.tabBar.backgroundColor = .white
+
         firstVC.tabBarItem.title = "Лента"
-        firstVC.tabBarItem.image = UIImage(systemName: "square.and.arrow.up")
+        firstVC.tabBarItem.image = UIImage(systemName: "house.fill")
         
-        let navigationControllerSecond = UINavigationController(rootViewController: secondVC)
-        secondVC.tabBarItem.title = "Профиль"
-        secondVC.tabBarItem.image = UIImage(systemName: "plus")
-        
-        viewControllers = [firstVC, secondVC]
-        
+        thirdVC.tabBarItem.title = "Профиль"
+        thirdVC.tabBarItem.image = UIImage(systemName: "person.fill")
+    
+        viewControllers = [firstVC, thirdVC]
+        thirdVC.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
