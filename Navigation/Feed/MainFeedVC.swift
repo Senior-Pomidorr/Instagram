@@ -7,12 +7,16 @@
 
 import UIKit
 
-class MainFeedViewController: UIViewController {
+class MainFeedViewController: UIViewController{
     
-    private lazy var mainTableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+    
+    private lazy var mainTableView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .vertical
         table.dataSource = self
-        table.register(MainFeedCell.self, forCellReuseIdentifier: MainFeedCell.identifier)
+        table.delegate = self
+        table.register(MainFeedCell.self, forCellWithReuseIdentifier: MainFeedCell.identifier)
         return table.autoLayout()
     }()
     
@@ -34,17 +38,18 @@ class MainFeedViewController: UIViewController {
     }
 }
 
-extension MainFeedViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 220
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 375)
     }
+    
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainFeedCell: UITableViewCell {
+class MainFeedCell: UICollectionViewCell {
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
@@ -40,8 +40,12 @@ class MainFeedCell: UITableViewCell {
         return label.autoLayout()
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//    private lazy var image: UIImage = {
+//        
+//    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         layoutCell()
     }
     
