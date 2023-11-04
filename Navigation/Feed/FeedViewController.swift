@@ -83,5 +83,5 @@ final class FeedViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
         ])
     }
-    
+     
 }
