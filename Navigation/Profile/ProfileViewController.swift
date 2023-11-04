@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     private var profilePosts = ProfilePosts.showPosts()
     private let headerView = ProfileHeaderView()

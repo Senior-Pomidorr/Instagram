@@ -8,8 +8,7 @@
 import UIKit
 
 
-
-class  PostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
     
     var profilePost: [ProfilePosts] = ProfilePosts.showPosts()
     private var indexPathCell = IndexPath()

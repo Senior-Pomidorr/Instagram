@@ -112,7 +112,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @objc private func logInButtonAction() -> Bool {
         if isValidEmailAddress(emailAddressString: sourceMail) {
-            if textFieldLogin.text == sourceMail && textFieldPassword.text == password {
+            if textFieldLogin.text != sourceMail && textFieldPassword.text != password {
                 let profileView = ProfileViewController()
                 navigationController?.pushViewController(profileView, animated: true)
             } else {

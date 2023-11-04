@@ -23,8 +23,8 @@ class UiTabBarController: UITabBarController {
 
         let image = UIImage(systemName: "house.fill")
         image?.withTintColor(.black)
-        firstVC.tabBarItem.title = "Лента"
-        firstVC.tabBarItem.image = image
+//        firstVC.tabBarItem.title = "Лента"
+//        firstVC.tabBarItem.image = image
         
         secondVC.tabBarItem.title = "MainFeed"
         secondVC.tabBarItem.image = image
@@ -32,7 +32,7 @@ class UiTabBarController: UITabBarController {
         thirdVC.tabBarItem.title = "Профиль"
         thirdVC.tabBarItem.image = UIImage(systemName: "person.fill")
     
-        viewControllers = [firstVC, secondVC, thirdVC]
+        viewControllers = [secondVC, thirdVC]
         thirdVC.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }

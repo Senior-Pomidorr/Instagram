@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShowPostView: UIView {
+final class ShowPostView: UIView {
     
     private let contentWhiteView: UIView = {
         let view = UIView()

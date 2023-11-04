@@ -11,7 +11,7 @@ protocol CellDelegate: AnyObject {
     func didTapImageInCell(_ image: UIImage?, imageRect: CGRect, indexPath: IndexPath)
 }
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+final class PhotoCollectionViewCell: UICollectionViewCell {
     
     weak var cellDelegate: CellDelegate?
     private var indexPathCell = IndexPath()

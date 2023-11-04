@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainFeedCell: UICollectionViewCell {
+final class MainFeedCell: UICollectionViewCell {
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
@@ -40,9 +40,12 @@ class MainFeedCell: UICollectionViewCell {
         return label.autoLayout()
     }()
     
-//    private lazy var image: UIImage = {
-//        
-//    }()
+    private lazy var photoImage: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .blue
+        image.contentMode = .scaleAspectFit
+        return image.autoLayout()
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -53,11 +56,12 @@ class MainFeedCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layoutCell() {
+    private func layoutCell() {
         contentView.addSubview(contentViewCell)
         contentViewCell.addSubview(avatarImage)
         contentViewCell.addSubview(autorName)
         contentViewCell.addSubview(locationName)
+        contentViewCell.addSubview(photoImage)
         
         NSLayoutConstraint.activate([
             contentViewCell.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -65,7 +69,7 @@ class MainFeedCell: UICollectionViewCell {
             contentViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            contentViewCell.heightAnchor.constraint(equalToConstant: 375),
+            contentViewCell.heightAnchor.constraint(equalToConstant: 576),
             
             avatarImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
             avatarImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 11),
@@ -76,7 +80,12 @@ class MainFeedCell: UICollectionViewCell {
             autorName.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 11),
             
             locationName.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
-            locationName.topAnchor.constraint(equalTo: autorName.bottomAnchor, constant: 1)
+            locationName.topAnchor.constraint(equalTo: autorName.bottomAnchor, constant: 1),
+            
+            photoImage.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 11),
+            photoImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor),
+            photoImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor),
+            photoImage.heightAnchor.constraint(equalToConstant: 375)
         ])
     }
        

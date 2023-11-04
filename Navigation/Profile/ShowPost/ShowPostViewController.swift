@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShowPostViewController: UIViewController {
+final class ShowPostViewController: UIViewController {
     
     private var showPostView = ShowPostView()
     private let model: ProfilePosts

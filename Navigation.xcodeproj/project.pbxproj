@@ -108,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				0D36599A2999289D008C47CC /* Application */,
+				0DD393742AF6AF0000AB8CDF /* TabBar */,
 				0DACF3CE29ABC9EB00507C01 /* Model */,
 				0DACF3D729AE1E0200507C01 /* Login */,
 				0D57880429A0CEF7008036D7 /* Profile */,
@@ -122,7 +123,6 @@
 		0D36599A2999289D008C47CC /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				0D3AA9362AF68A48007E867A /* TabBar.swift */,
 				0D36595B29950EA7008C47CC /* AppDelegate.swift */,
 				0D36595D29950EA7008C47CC /* SceneDelegate.swift */,
 			);
@@ -193,6 +193,14 @@
 				0D365998299913F0008C47CC /* PostViewController.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		0DD393742AF6AF0000AB8CDF /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				0D3AA9362AF68A48007E867A /* TabBar.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

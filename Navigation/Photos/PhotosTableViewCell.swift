@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotosTableViewCell: UITableViewCell {
+final class PhotosTableViewCell: UITableViewCell {
     
     private let photos = photoCels
     private let photosViewController = PhotosViewController()

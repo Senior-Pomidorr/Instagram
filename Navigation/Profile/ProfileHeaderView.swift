@@ -11,7 +11,7 @@ protocol HeaderDelegate: AnyObject {
     func tapImage(_ image: UIImage?, imageRect: CGRect)
 }
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     
     weak var myDelegate: HeaderDelegate?
     private var statusText = ""

@@ -7,9 +7,8 @@
 
 import UIKit
 
-class MainFeedViewController: UIViewController{
-    
-    
+final class MainFeedViewController: UIViewController{
+
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
