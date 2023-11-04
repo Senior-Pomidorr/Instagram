@@ -27,6 +27,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         let logoImage = UIImageView()
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.image = Picture.logo
+        logoImage.contentMode = .scaleAspectFit
         return logoImage
     }()
     
@@ -43,7 +44,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.layer.borderWidth = 0.5
         textField.text = ""
         textField.indent(size: 10)
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return textField
     }()
@@ -62,7 +63,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
         textField.indent(size: 10)
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return textField
     }()
@@ -72,7 +73,7 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.backgroundColor = UIColor(red: 55/255, green: 131/255, blue: 239/255, alpha: 1)
         button.layer.cornerRadius = 10
         button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
         button.layer.masksToBounds = true
@@ -195,17 +196,15 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+            logoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
             logoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            logoImage.widthAnchor.constraint(equalToConstant: 100),
-            logoImage.heightAnchor.constraint(equalToConstant: 100),
             
             passwordLabelCheck.bottomAnchor.constraint(equalTo: textFieldLogin.topAnchor, constant: -20),
             passwordLabelCheck.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 64),
             passwordLabelCheck.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
             passwordLabelCheck.heightAnchor.constraint(equalToConstant: 80),
             
-            textFieldLogin.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
+            textFieldLogin.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 40),
             textFieldLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             textFieldLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             textFieldLogin.heightAnchor.constraint(equalToConstant: 50),

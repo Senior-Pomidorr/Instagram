@@ -47,6 +47,39 @@ final class MainFeedCell: UICollectionViewCell {
         return image.autoLayout()
     }()
     
+    private lazy var stack: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 14
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.alignment = .leading
+        return stack.autoLayout()
+    }()
+    
+    private lazy var likeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Like"), for: .normal)
+        return button.autoLayout()
+    }()
+    
+    private lazy var commentButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Comment"), for: .normal)
+        return button.autoLayout()
+    }()
+    
+    private lazy var messageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Messanger"), for: .normal)
+        return button.autoLayout()
+    }()
+    
+    private lazy var bookmarksButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Save"), for: .normal)
+        return button.autoLayout()
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         layoutCell()
@@ -58,19 +91,17 @@ final class MainFeedCell: UICollectionViewCell {
     
     private func layoutCell() {
         contentView.addSubview(contentViewCell)
-        contentViewCell.addSubview(avatarImage)
-        contentViewCell.addSubview(autorName)
-        contentViewCell.addSubview(locationName)
-        contentViewCell.addSubview(photoImage)
+        
+        [avatarImage, autorName, locationName, photoImage, stack , bookmarksButton].forEach { contentViewCell.addSubview($0) }
+        
+        [likeButton, commentButton, messageButton].forEach { stack.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
             contentViewCell.topAnchor.constraint(equalTo: contentView.topAnchor),
             contentViewCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            contentViewCell.heightAnchor.constraint(equalToConstant: 576),
-            
+                    
             avatarImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
             avatarImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 11),
             avatarImage.heightAnchor.constraint(equalToConstant: 32),
@@ -85,8 +116,15 @@ final class MainFeedCell: UICollectionViewCell {
             photoImage.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 11),
             photoImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor),
             photoImage.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor),
-            photoImage.heightAnchor.constraint(equalToConstant: 375)
+            photoImage.heightAnchor.constraint(equalToConstant: 375),
+            
+            stack.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 14),
+            stack.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 14),
+            stack.heightAnchor.constraint(equalToConstant: 24),
+            
+            bookmarksButton.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
+            bookmarksButton.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 14)
         ])
     }
-       
+    
 }

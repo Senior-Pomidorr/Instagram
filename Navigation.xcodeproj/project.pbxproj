@@ -16,7 +16,7 @@
 		0D36599C299B9DA3008C47CC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D36599B299B9DA3008C47CC /* Info.swift */; };
 		0D374F0129D717E8003FF07D /* ShowPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D374F0029D717E8003FF07D /* ShowPostView.swift */; };
 		0D3AA92F2AF685B5007E867A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3AA92E2AF685B5007E867A /* Extensions.swift */; };
-		0D3AA9332AF689F2007E867A /* MainFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3AA9322AF689F2007E867A /* MainFeedVC.swift */; };
+		0D3AA9332AF689F2007E867A /* MainFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3AA9322AF689F2007E867A /* MainFeedViewController.swift */; };
 		0D3AA9352AF68A28007E867A /* MainFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3AA9342AF68A28007E867A /* MainFeedCell.swift */; };
 		0D3AA9372AF68A48007E867A /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3AA9362AF68A48007E867A /* TabBar.swift */; };
 		0D5070B929D88E6D00B9332C /* ShowPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5070B829D88E6C00B9332C /* ShowPostViewController.swift */; };
@@ -46,7 +46,7 @@
 		0D36599B299B9DA3008C47CC /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		0D374F0029D717E8003FF07D /* ShowPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostView.swift; sourceTree = "<group>"; };
 		0D3AA92E2AF685B5007E867A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "../../../../Downloads/NetologyGraduationProject-main/Navigation/Resources/Extensions.swift"; sourceTree = "<group>"; };
-		0D3AA9322AF689F2007E867A /* MainFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedVC.swift; sourceTree = "<group>"; };
+		0D3AA9322AF689F2007E867A /* MainFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedViewController.swift; sourceTree = "<group>"; };
 		0D3AA9342AF68A28007E867A /* MainFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedCell.swift; sourceTree = "<group>"; };
 		0D3AA9362AF68A48007E867A /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		0D5070B829D88E6C00B9332C /* ShowPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		0DACF3D829AE1E4100507C01 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				0D3AA9322AF689F2007E867A /* MainFeedVC.swift */,
+				0D3AA9322AF689F2007E867A /* MainFeedViewController.swift */,
 				0D3659922996F954008C47CC /* FeedViewController.swift */,
 				0D3AA9342AF68A28007E867A /* MainFeedCell.swift */,
 			);
@@ -284,7 +284,7 @@
 				0D3AA9372AF68A48007E867A /* TabBar.swift in Sources */,
 				0D36595C29950EA7008C47CC /* AppDelegate.swift in Sources */,
 				0DACF3CD29A8B24500507C01 /* LogInViewController.swift in Sources */,
-				0D3AA9332AF689F2007E867A /* MainFeedVC.swift in Sources */,
+				0D3AA9332AF689F2007E867A /* MainFeedViewController.swift in Sources */,
 				0D9DA59429B50722001E6147 /* PhotoCollectionViewCell.swift in Sources */,
 				0D3659932996F954008C47CC /* FeedViewController.swift in Sources */,
 				0D3659952996F967008C47CC /* ProfileViewController.swift in Sources */,

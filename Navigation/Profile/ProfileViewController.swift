@@ -106,9 +106,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         profilePosts.count
     }
     
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        1
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         1

@@ -83,7 +83,7 @@ final class PostTableViewCell: UITableViewCell {
     func setupCustomCell(with model: IndexPath) {
         indexPathCell = model
         ImageView.image = profilePost[indexPathCell.row].image
-        authorName.text = profilePost[indexPathCell.row].author 
+        authorName.text = profilePost[indexPathCell.row].author
         descriptionText.text = profilePost[indexPathCell.row].description
         likes.text = "Likes: \(String(profilePost[indexPathCell.row].likes))"
         views.text = "Views: \(String(profilePost[indexPathCell.row].views))"

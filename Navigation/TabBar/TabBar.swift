@@ -21,15 +21,15 @@ class UiTabBarController: UITabBarController {
     private func setupControllers() {
         self.tabBar.backgroundColor = .white
 
-        let image = UIImage(systemName: "house.fill")
+        let image = UIImage(named: "main")
         image?.withTintColor(.black)
 //        firstVC.tabBarItem.title = "Лента"
 //        firstVC.tabBarItem.image = image
         
-        secondVC.tabBarItem.title = "MainFeed"
+        secondVC.tabBarItem.title = "Main"
         secondVC.tabBarItem.image = image
         
-        thirdVC.tabBarItem.title = "Профиль"
+        thirdVC.tabBarItem.title = "Profile"
         thirdVC.tabBarItem.image = UIImage(systemName: "person.fill")
     
         viewControllers = [secondVC, thirdVC]
