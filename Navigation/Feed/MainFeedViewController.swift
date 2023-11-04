@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainFeedViewController: UIViewController{
-
+    
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -43,12 +43,33 @@ extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath)
+        guard let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as? MainFeedCell else {
+            return UICollectionViewCell()
+        }
+        cell.delegate = self
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 575)
     }
+}
+
+extension MainFeedViewController: DelegateCell {
     
+    func tapLikeButton() {
+        print("tap like")
+    }
+    
+    func tapComment() {
+        print("tap comment")
+    }
+    
+    func tapMessage() {
+        print("tap message")
+    }
+    
+    func tapBookmark() {
+        print("tap bookmark")
+    }
 }

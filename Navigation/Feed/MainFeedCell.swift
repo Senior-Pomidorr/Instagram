@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol DelegateCell: AnyObject {
+    func tapLikeButton()
+    func tapComment()
+    func tapMessage()
+    func tapBookmark()
+}
+
 final class MainFeedCell: UICollectionViewCell {
+    
+    weak var delegate: DelegateCell?
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
@@ -59,24 +68,28 @@ final class MainFeedCell: UICollectionViewCell {
     private lazy var likeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Like"), for: .normal)
+        button.addTarget(self, action: #selector(tapLikeButton), for: .touchUpInside)
         return button.autoLayout()
     }()
     
     private lazy var commentButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Comment"), for: .normal)
+        button.addTarget(self, action: #selector(tapComment), for: .touchUpInside)
         return button.autoLayout()
     }()
     
     private lazy var messageButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Messanger"), for: .normal)
+        button.addTarget(self, action: #selector(tapMessage), for: .touchUpInside)
         return button.autoLayout()
     }()
     
     private lazy var bookmarksButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Save"), for: .normal)
+        button.addTarget(self, action: #selector(tapBookmark), for: .touchUpInside)
         return button.autoLayout()
     }()
     
@@ -87,6 +100,22 @@ final class MainFeedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func tapLikeButton() {
+        delegate?.tapLikeButton()
+    }
+    
+    @objc func tapComment() {
+        delegate?.tapComment()
+    }
+    
+    @objc func tapMessage() {
+        delegate?.tapMessage()
+    }
+    
+    @objc func tapBookmark() {
+        delegate?.tapBookmark()
     }
     
     private func layoutCell() {
@@ -101,7 +130,7 @@ final class MainFeedCell: UICollectionViewCell {
             contentViewCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                    
+            
             avatarImage.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
             avatarImage.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 11),
             avatarImage.heightAnchor.constraint(equalToConstant: 32),
@@ -126,5 +155,4 @@ final class MainFeedCell: UICollectionViewCell {
             bookmarksButton.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 14)
         ])
     }
-    
 }

@@ -25,7 +25,7 @@ final class FeedViewController: UIViewController {
         title = textForLabel
         view.addSubview(buttonOne)
         view.addSubview(buttonTwo)
-        loyout()
+        layout()
     }
     
     
@@ -71,7 +71,7 @@ final class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loyout() {
+    private func layout() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(buttonOne)
         stackView.addArrangedSubview(buttonTwo)
@@ -83,5 +83,5 @@ final class FeedViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
         ])
     }
-     
 }
+
