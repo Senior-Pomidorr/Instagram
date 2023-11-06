@@ -8,7 +8,12 @@
 import UIKit
 
 final class MainFeedViewController: UIViewController{
-    
+
+    var posts: [Posts] = [] {
+        didSet {
+            mainTableView.reloadData()
+        }
+    }
     
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -24,7 +29,11 @@ final class MainFeedViewController: UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .red
         layoutTableView()
-        NetworkService.network.getPosts()
+        NetworkService.network.getPosts { [weak self] (posts) in
+            DispatchQueue.main.async {
+                self?.posts = posts
+            }
+        }
     }
     
     private func layoutTableView() {
@@ -41,13 +50,12 @@ final class MainFeedViewController: UIViewController{
 
 extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as? MainFeedCell else {
-            return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
+        cell.configure(posts[indexPath.row])
         cell.delegate = self
         return cell
     }

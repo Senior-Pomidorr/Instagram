@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol mainViewCellDelagate: AnyObject {
     func tapLikeButton()
@@ -102,6 +103,12 @@ final class MainFeedCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - CofigureCell
+    func configure(_ post: Posts) {
+        let url = URL(string: post.url)
+        photoImage.kf.setImage(with: url)
+    }
+    
     @objc func tapLikeButton() {
         delegate?.tapLikeButton()
     }
@@ -118,6 +125,7 @@ final class MainFeedCell: UICollectionViewCell {
         delegate?.tapBookmark()
     }
     
+    //MARK: - Layout
     private func layoutCell() {
         contentView.addSubview(contentViewCell)
         

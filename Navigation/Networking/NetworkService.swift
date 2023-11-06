@@ -9,8 +9,9 @@ import Foundation
 class NetworkService {
     
     static let network = NetworkService()
+    private init() {}
     
-    func getPosts() {
+    func getPosts(_ completionHandler: @escaping ([Posts]) -> ()) {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/photos") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -21,9 +22,9 @@ class NetworkService {
                    resp.statusCode == 200,
                    let responseData = data {
                     let posts = try? JSONDecoder().decode([Posts].self, from: responseData)
-                    print(posts)
+//                    print(posts)
+                    completionHandler(posts ?? [])
                 }
-    
             }
         }.resume()
     }
