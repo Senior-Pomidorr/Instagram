@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DelegateCell: AnyObject {
+protocol mainViewCellDelagate: AnyObject {
     func tapLikeButton()
     func tapComment()
     func tapMessage()
@@ -16,7 +16,7 @@ protocol DelegateCell: AnyObject {
 
 final class MainFeedCell: UICollectionViewCell {
     
-    weak var delegate: DelegateCell?
+    weak var delegate: mainViewCellDelagate?
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
@@ -49,7 +49,7 @@ final class MainFeedCell: UICollectionViewCell {
         return label.autoLayout()
     }()
     
-    private lazy var photoImage: UIImageView = {
+    lazy var photoImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .blue
         image.contentMode = .scaleAspectFit

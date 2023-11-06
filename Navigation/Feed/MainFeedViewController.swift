@@ -9,6 +9,7 @@ import UIKit
 
 final class MainFeedViewController: UIViewController{
     
+    
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -23,6 +24,7 @@ final class MainFeedViewController: UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .red
         layoutTableView()
+        NetworkService.network.getPosts()
     }
     
     private func layoutTableView() {
@@ -55,7 +57,7 @@ extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-extension MainFeedViewController: DelegateCell {
+extension MainFeedViewController: mainViewCellDelagate {
     
     func tapLikeButton() {
         print("tap like")

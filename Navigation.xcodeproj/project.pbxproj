@@ -32,6 +32,10 @@
 		0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */; };
 		0DACF3D629AD3E0B00507C01 /* UiView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D529AD3E0B00507C01 /* UiView Extension.swift */; };
 		0DD393732AF6AB5C00AB8CDF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0DD393722AF6AB5C00AB8CDF /* Kingfisher */; };
+		0DD393772AF7FA5200AB8CDF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD393762AF7FA5200AB8CDF /* Endpoint.swift */; };
+		0DD393792AF7FB4600AB8CDF /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD393782AF7FB4600AB8CDF /* HTTPMethod.swift */; };
+		0DD3938B2AF90DFF00AB8CDF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD3938A2AF90DFF00AB8CDF /* NetworkService.swift */; };
+		0DD3938D2AF9191700AB8CDF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD3938C2AF9191700AB8CDF /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +65,10 @@
 		0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePosts.swift; sourceTree = "<group>"; };
 		0DACF3D529AD3E0B00507C01 /* UiView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView Extension.swift"; sourceTree = "<group>"; };
+		0DD393762AF7FA5200AB8CDF /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		0DD393782AF7FB4600AB8CDF /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		0DD3938A2AF90DFF00AB8CDF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		0DD3938C2AF9191700AB8CDF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,7 @@
 		0D36595A29950EA7008C47CC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				0DD393752AF7FA1900AB8CDF /* Networking */,
 				0D36599A2999289D008C47CC /* Application */,
 				0DD393742AF6AF0000AB8CDF /* TabBar */,
 				0DACF3CE29ABC9EB00507C01 /* Model */,
@@ -203,6 +212,17 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		0DD393752AF7FA1900AB8CDF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0DD393762AF7FA5200AB8CDF /* Endpoint.swift */,
+				0DD3938A2AF90DFF00AB8CDF /* NetworkService.swift */,
+				0DD3938C2AF9191700AB8CDF /* Model.swift */,
+				0DD393782AF7FB4600AB8CDF /* HTTPMethod.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -278,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD3938D2AF9191700AB8CDF /* Model.swift in Sources */,
 				0D9DA58C29B25C86001E6147 /* PhotosTableViewCell.swift in Sources */,
 				0D9DA59229B3A0FB001E6147 /* PhotoPost.swift in Sources */,
 				0D365999299913F0008C47CC /* PostViewController.swift in Sources */,
@@ -286,8 +307,10 @@
 				0DACF3CD29A8B24500507C01 /* LogInViewController.swift in Sources */,
 				0D3AA9332AF689F2007E867A /* MainFeedViewController.swift in Sources */,
 				0D9DA59429B50722001E6147 /* PhotoCollectionViewCell.swift in Sources */,
+				0DD393792AF7FB4600AB8CDF /* HTTPMethod.swift in Sources */,
 				0D3659932996F954008C47CC /* FeedViewController.swift in Sources */,
 				0D3659952996F967008C47CC /* ProfileViewController.swift in Sources */,
+				0DD393772AF7FA5200AB8CDF /* Endpoint.swift in Sources */,
 				0D9DA59029B2725C001E6147 /* PhotosViewController.swift in Sources */,
 				0DACF3D629AD3E0B00507C01 /* UiView Extension.swift in Sources */,
 				0D5070BD29E046A700B9332C /* LoginValidation.swift in Sources */,
@@ -300,6 +323,7 @@
 				0D36595E29950EA7008C47CC /* SceneDelegate.swift in Sources */,
 				0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */,
 				0DACF3D229AD2F4800507C01 /* PostTableViewCell.swift in Sources */,
+				0DD3938B2AF90DFF00AB8CDF /* NetworkService.swift in Sources */,
 				0D57880329A0CEDE008036D7 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
