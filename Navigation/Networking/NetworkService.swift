@@ -6,25 +6,46 @@
 //
 
 import Foundation
-class NetworkService {
+final class NetworkService {
     
-    static let network = NetworkService()
+    static let shared = NetworkService()
+    
+    private let token = "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"
     private init() {}
     
-    func getPosts(_ completionHandler: @escaping ([Posts]) -> ()) {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/photos") else { return }
+    func getPosts(_ completion: @escaping (Data?, Error?) -> ())  {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.unsplash.com"
+        urlComponents.path = "/search/photos"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "query", value: "office"),
+            URLQueryItem(name: "per_page", value: "30")
+            //                        URLQueryItem(name: "client_id", value: "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"),
+        ]
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print("error in request")
-            } else {
-                if let resp = response as? HTTPURLResponse,
-                   resp.statusCode == 200,
-                   let responseData = data {
-                    let posts = try? JSONDecoder().decode([Posts].self, from: responseData)
-//                    print(posts)
-                    completionHandler(posts ?? [])
-                }
+        guard let url = urlComponents.url else { return }
+        //        print("URL: \(url)")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.setValue("Client-ID \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("REQUEST \(request)")
+            guard error == nil else {
+                print(error?.localizedDescription ?? "error")
+                return
+            }
+            
+            if let resp = response as? HTTPURLResponse {
+                print("Response status code: \(resp.statusCode)")
+            }
+            
+            
+            DispatchQueue.main.async {
+                completion(data, error)
+                print("Response posts data = \(String(describing: data))")
             }
         }.resume()
     }

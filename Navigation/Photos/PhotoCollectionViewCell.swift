@@ -39,10 +39,6 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         imageViewCell.image = UIImage(named: photo.image)
     }
     
-    func setIndexPath(_ indexPath: IndexPath) {
-        indexPathCell = indexPath
-    }
-    
     @objc func animateImageCell() {
         cellDelegate?.didTapImageInCell(imageViewCell.image, imageRect: imageViewCell.frame, indexPath: indexPathCell)
     }

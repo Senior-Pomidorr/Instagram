@@ -7,13 +7,9 @@
 
 import UIKit
 
-final class MainFeedViewController: UIViewController{
-
-    var posts: [Posts] = [] {
-        didSet {
-            mainTableView.reloadData()
-        }
-    }
+final class MainFeedViewController: UIViewController {
+    var posts = [SearchResults]()
+    var networkDataFetcher = NetworkDataFetcher()
     
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,12 +24,23 @@ final class MainFeedViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        layoutTableView()
-        NetworkService.network.getPosts { [weak self] (posts) in
-            DispatchQueue.main.async {
-                self?.posts = posts
+        networkDataFetcher.fetchImages(searchTerm: "") { searchResults in
+//            DispatchQueue.main.async {
+            if let searchResults = searchResults {
+                self.posts.append(searchResults)
+                    self.mainTableView.reloadData()
+                
+//                self.posts.append(searchResults)
+                
+                
+//                searchResults?.results.map({ photo in
+//                    print(photo.urls["small"]!)
+//                    print(self.posts)
+//                    //                self.mainTableView.reloadData()
+//                })
             }
         }
+        layoutTableView()
     }
     
     private func layoutTableView() {
@@ -55,7 +62,7 @@ extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
-        cell.configure(posts[indexPath.row])
+        cell.configure(posts[indexPath.item], indexPath: indexPath)
         cell.delegate = self
         return cell
     }

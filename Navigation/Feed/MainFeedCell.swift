@@ -53,7 +53,9 @@ final class MainFeedCell: UICollectionViewCell {
     lazy var photoImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .blue
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.backgroundColor = .red
+//        image.clipsToBounds = true
         return image.autoLayout()
     }()
     
@@ -104,9 +106,11 @@ final class MainFeedCell: UICollectionViewCell {
     }
     
     //MARK: - CofigureCell
-    func configure(_ post: Posts) {
-        let url = URL(string: post.url)
-        photoImage.kf.setImage(with: url)
+    func configure(_ post: SearchResults, indexPath: IndexPath) {
+        if let url = URL(string: post.results[indexPath.item].urls["regular"]!) {
+                //        photoImage.kf.indicatorType = .activity
+                        self.photoImage.kf.setImage(with: url)
+        }
     }
     
     @objc func tapLikeButton() {
