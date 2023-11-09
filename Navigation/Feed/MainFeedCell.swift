@@ -106,11 +106,11 @@ final class MainFeedCell: UICollectionViewCell {
     }
     
     //MARK: - CofigureCell
-    func configure(_ post: SearchResults, indexPath: IndexPath) {
-        if let url = URL(string: post.results[indexPath.item].urls["regular"]!) {
-                //        photoImage.kf.indicatorType = .activity
-                        self.photoImage.kf.setImage(with: url)
-        }
+    func configure(_ post: [UnsplashPhoto], indexPath: IndexPath) {
+        guard let urlString = post[indexPath.item].urls["regular"] else { return }
+        let url = URL(string: urlString)
+        self.photoImage.kf.indicatorType = .activity
+        self.photoImage.kf.setImage(with: url)
     }
     
     @objc func tapLikeButton() {

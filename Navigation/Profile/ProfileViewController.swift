@@ -107,9 +107,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        1
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:  PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell

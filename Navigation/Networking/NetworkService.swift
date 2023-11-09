@@ -42,10 +42,9 @@ final class NetworkService {
                 print("Response status code: \(resp.statusCode)")
             }
             
-            
             DispatchQueue.main.async {
                 completion(data, error)
-                print("Response posts data = \(String(describing: data))")
+                print("Response posts data = \(String(decoding: data!, as: UTF8.self))")
             }
         }.resume()
     }
