@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 
 final class MainFeedViewController: UIViewController {
+    private var likes = [SearchResults]()
     private var posts: [UnsplashPhoto] = [] {
         didSet {
             return self.mainTableView.reloadData()

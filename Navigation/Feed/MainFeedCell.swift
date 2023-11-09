@@ -21,23 +21,24 @@ final class MainFeedCell: UICollectionViewCell {
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
-        content.backgroundColor = .white
+//        content.backgroundColor = .white
         content.layer.borderColor = UIColor.black.cgColor
         return content.autoLayout()
     }()
     
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 16
         image.backgroundColor = .red
+        image.clipsToBounds = true
         return image.autoLayout()
     }()
     
     private lazy var autorName: UILabel = {
         let label = UILabel()
         label.text = "Author Name"
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.textColor = .black
         return label.autoLayout()
     }()
@@ -52,10 +53,10 @@ final class MainFeedCell: UICollectionViewCell {
     
     lazy var photoImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .blue
+//        image.backgroundColor = .blue
         image.contentMode = .scaleAspectFill
-        image.backgroundColor = .red
-//        image.clipsToBounds = true
+//        image.backgroundColor = .red
+        image.clipsToBounds = true
         return image.autoLayout()
     }()
     
@@ -73,6 +74,20 @@ final class MainFeedCell: UICollectionViewCell {
         button.setImage(UIImage(named: "Like"), for: .normal)
         button.addTarget(self, action: #selector(tapLikeButton), for: .touchUpInside)
         return button.autoLayout()
+    }()
+    
+    lazy var textLikes: UITextView = {
+       let text = UITextView()
+        text.textColor = .black
+        text.font = .systemFont(ofSize: 16)
+        return text.autoLayout()
+    }()
+    
+    lazy var descriptionText: UITextView = {
+       let text = UITextView()
+        text.textColor = .black
+        text.font = .systemFont(ofSize: 16)
+        return text.autoLayout()
     }()
     
     private lazy var commentButton: UIButton = {
@@ -111,6 +126,13 @@ final class MainFeedCell: UICollectionViewCell {
         let url = URL(string: urlString)
         self.photoImage.kf.indicatorType = .activity
         self.photoImage.kf.setImage(with: url)
+        self.textLikes.text = "Likes: \(String(post[indexPath.item].likes))"
+        
+        guard let urlPhotoString = post[indexPath.item].user.profile_image["medium"] else { return }
+        let urlPhoto = URL(string: urlPhotoString)
+        self.avatarImage.kf.setImage(with: urlPhoto)
+        self.autorName.text = post[indexPath.item].user.username
+//        self.descriptionText.text = post[indexPath.item].cover_photo.description
     }
     
     @objc func tapLikeButton() {
@@ -133,7 +155,7 @@ final class MainFeedCell: UICollectionViewCell {
     private func layoutCell() {
         contentView.addSubview(contentViewCell)
         
-        [avatarImage, autorName, locationName, photoImage, stack , bookmarksButton].forEach { contentViewCell.addSubview($0) }
+        [avatarImage, autorName, locationName, photoImage, stack , bookmarksButton, textLikes, descriptionText].forEach { contentViewCell.addSubview($0) }
         
         [likeButton, commentButton, messageButton].forEach { stack.addArrangedSubview($0) }
         
@@ -164,7 +186,17 @@ final class MainFeedCell: UICollectionViewCell {
             stack.heightAnchor.constraint(equalToConstant: 24),
             
             bookmarksButton.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
-            bookmarksButton.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 14)
+            bookmarksButton.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 14),
+            
+            textLikes.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
+            textLikes.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
+            textLikes.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
+            textLikes.heightAnchor.constraint(equalToConstant: 40),
+            
+//            descriptionText.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
+//            descriptionText.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
+//            descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
+//            descriptionText.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
 }

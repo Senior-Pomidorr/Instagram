@@ -15,7 +15,10 @@ struct SearchResults: Decodable {
 struct UnsplashPhoto: Decodable {
     let width: Int
     let height: Int
+    let likes: Int
     let urls: [URLKIng.RawValue:String]
+    let user: User
+//    let cover_photo: DescriptionText
     
     enum URLKIng: String {
         case raw
@@ -24,7 +27,21 @@ struct UnsplashPhoto: Decodable {
         case small
         case thumb
     }
+    
 }
 
+struct User: Decodable {
+    let profile_image: [ProfileImage.RawValue: String]
+    let username: String
+    
+    enum ProfileImage: String {
+        case small
+        case medium
+        case large
+    }
+}
 
+//struct DescriptionText: Decodable {
+//    let description: String
+//}
 

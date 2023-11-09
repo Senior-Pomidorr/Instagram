@@ -20,8 +20,9 @@ final class NetworkService {
         urlComponents.path = "/search/photos"
         urlComponents.queryItems = [
             URLQueryItem(name: "page", value: "1"),
-            URLQueryItem(name: "query", value: "office"),
-            URLQueryItem(name: "per_page", value: "30")
+            URLQueryItem(name: "query", value: "relevant"),
+            URLQueryItem(name: "per_page", value: "30"),
+            URLQueryItem(name: "order_by", value: "popular"),
             //                        URLQueryItem(name: "client_id", value: "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"),
         ]
         
@@ -44,7 +45,7 @@ final class NetworkService {
             
             DispatchQueue.main.async {
                 completion(data, error)
-                print("Response posts data = \(String(decoding: data!, as: UTF8.self))")
+//                print("Response posts data = \(String(decoding: data!, as: UTF8.self))")
             }
         }.resume()
     }
