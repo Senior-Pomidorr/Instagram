@@ -13,11 +13,11 @@ final class FeedViewController: UIViewController {
     
     private let feedViewButton = UITabBarItem()
     
-    @objc private func actionTab() {
-        let postViewCobtroller = PostViewController()
-        navigationController?.pushViewController(postViewCobtroller, animated: true)
-        print("Touch Button")
-    }
+//    @objc private func actionTab() {
+////        let postViewCobtroller = PostViewController()
+//        navigationController?.pushViewController(postViewCobtroller, animated: true)
+//        print("Touch Button")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ final class FeedViewController: UIViewController {
         button.setTitle("Переход на пост", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
         return button
     }()
     
@@ -51,7 +51,7 @@ final class FeedViewController: UIViewController {
         button.setTitle("Переход на пост", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(actionTab), for: .touchUpInside)
         return button
     }()
     

@@ -97,7 +97,6 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         layout()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         notifiacation.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -109,7 +108,6 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
         notifiacation.removeObserver(UIResponder.keyboardWillShowNotification)
         notifiacation.removeObserver(UIResponder.keyboardWillHideNotification)
     }
-    
     
     @objc private func logInButtonAction() -> Bool {
         if isValidEmailAddress(emailAddressString: sourceMail) {
