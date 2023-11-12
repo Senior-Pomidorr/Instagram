@@ -14,6 +14,7 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
     private var timer: Timer?
     private let itemsPerRow: CGFloat = 2
     private let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    private var selectedImages = [UIImage]()
     
     private var photos: [UnsplashPhoto] = [] {
         didSet {
@@ -45,11 +46,12 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
     
     @objc func actionBarButtonTapped() {
         print(#function)
+        let shareController = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
+        present(shareController, animated: true)
     }
     
     private func setupCollectionView() {
         collectionView.register(PhotosSearchCell.self, forCellWithReuseIdentifier: PhotosSearchCell.identifier)
-//        collectionView.backgroundColor = .red
         collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.contentInsetAdjustmentBehavior = .automatic
     }
@@ -79,6 +81,7 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
         searchController.searchBar.placeholder = "Search"
     }
     
+    //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
@@ -87,8 +90,21 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosSearchCell.identifier, for: indexPath) as! PhotosSearchCell
         let photos = photos[indexPath.item]
         cell.unsplashPhoto = photos
-        //        cell.backgroundColor = .blue
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PhotosSearchCell
+        guard let image = cell.photoImage.image else { return }
+        selectedImages.append(image)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PhotosSearchCell
+        guard let image = cell.photoImage.image else { return }
+        if let index = selectedImages.firstIndex(of: image) {
+            selectedImages.remove(at: index)
+        }
     }
 }
 
