@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SearchPhotosViewController: UICollectionViewController, UISearchControllerDelegate {
+final class SearchPhotosViewController: UICollectionViewController, UISearchControllerDelegate {
     
     private var networkDataFetcher = NetworkDataFetcher()
     private var timer: Timer?

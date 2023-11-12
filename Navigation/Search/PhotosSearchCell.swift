@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class PhotosSearchCell: UICollectionViewCell {
+final class PhotosSearchCell: UICollectionViewCell {
     
     lazy var photoImage: UIImageView = {
         let image = UIImageView()

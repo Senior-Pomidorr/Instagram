@@ -38,7 +38,7 @@ final class NetworkService {
         urlComponents.queryItems = [
             URLQueryItem(name: "page", value: "1"),
             URLQueryItem(name: "query", value: query),
-            URLQueryItem(name: "per_page", value: "30"),
+            URLQueryItem(name: "per_page", value: "50"),
             URLQueryItem(name: "order_by", value: "popular"),
         ]
         return urlComponents

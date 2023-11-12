@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class PostTableViewCell: UITableViewCell {
     
     var profilePost: [ProfilePosts] = ProfilePosts.showPosts()
@@ -46,7 +45,7 @@ final class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 0
-        label.textColor = .systemGray
+        label.textColor = .black
         return label
     }()
     
@@ -77,7 +76,10 @@ final class PostTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.accessoryType = .none
+        ImageView.image = nil
+        descriptionText.text = nil
+        views.text = nil
+        likes.text = nil
     }
     
     func setupCustomCell(with model: IndexPath) {
