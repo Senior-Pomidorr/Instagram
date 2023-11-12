@@ -7,15 +7,14 @@
 
 import UIKit
 
-class UiTabBarController: UITabBarController {
+final class UiTabBarController: UITabBarController {
     
-//    private let firstVC = UINavigationController(rootViewController: FeedViewController())
-    private let firstVC = LogInViewController()
-    private var searchViewLayout = SearchPhotosViewController(collectionViewLayout: UICollectionViewLayout())
+//    private let firstVC = UINavigationController(rootViewController: FeedViewController()) 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewControllers = [
+          self.tabBar.backgroundColor = .white
+        viewControllers = [
             generateNavigationController(
                 rootViewController: MainFeedViewController(),
                 title: "Main",
@@ -24,24 +23,21 @@ class UiTabBarController: UITabBarController {
                 )!
             ),
             generateNavigationController(
-                rootViewController: searchViewLayout,
+                rootViewController: SearchPhotosViewController(collectionViewLayout: UICollectionViewFlowLayout()),
                 title: "Search",
                 image: UIImage(
                     systemName: "magnifyingglass"
                 )!
             ),
             generateNavigationController(
-                rootViewController: firstVC,
+                rootViewController: LogInViewController(),
                 title: "Profile",
                 image: UIImage(
                     systemName: "person.fill"
                 )!
             )
         ]
-//        firstVC.navigationController?.setNavigationBarHidden(true, animated: true)
-          self.tabBar.backgroundColor = .white
     }
-   
     
     //MARK: - Setup ViewControllers
     private func generateNavigationController(rootViewController: UIViewController, title: String?, image: UIImage) -> UIViewController {

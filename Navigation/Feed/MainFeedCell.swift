@@ -21,7 +21,6 @@ final class MainFeedCell: UICollectionViewCell {
     
     private lazy var contentViewCell: UIView = {
         let content = UIView()
-//        content.backgroundColor = .white
         content.layer.borderColor = UIColor.black.cgColor
         return content.autoLayout()
     }()
@@ -58,15 +57,6 @@ final class MainFeedCell: UICollectionViewCell {
 //        image.backgroundColor = .red
         image.clipsToBounds = true
         return image.autoLayout()
-    }()
-    
-    private lazy var stack: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 14
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.alignment = .leading
-        return stack.autoLayout()
     }()
     
     private lazy var likeButton: UIButton = {
@@ -111,6 +101,15 @@ final class MainFeedCell: UICollectionViewCell {
         return button.autoLayout()
     }()
     
+    private lazy var stack: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 14
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.alignment = .leading
+        return stack.autoLayout()
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         layoutCell()
@@ -118,6 +117,14 @@ final class MainFeedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImage.image = nil
+        avatarImage.image = nil
+        autorName.text = nil
+        textLikes.text = nil
     }
     
     //MARK: - CofigureCell

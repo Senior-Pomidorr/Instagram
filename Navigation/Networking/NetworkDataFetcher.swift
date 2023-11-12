@@ -10,7 +10,7 @@ import Foundation
 class NetworkDataFetcher {
     
     func fetchImages(searchTerm: String, completion: @escaping (SearchResults?) -> ()) {
-        NetworkService.shared.getPosts { data, error in
+        NetworkService.shared.getPosts(searchTerm: searchTerm) { data, error in
             if let error = error {
                 print("Error recived requesting data: \(error.localizedDescription)")
                 completion(nil)

@@ -29,22 +29,27 @@ final class MainFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        networkDataFetcher.fetchImages(searchTerm: "") { [weak self] searchResults in
+        view.backgroundColor = .white
+        layoutTableView()
+        
+        networkDataFetcher.fetchImages(searchTerm: "popular") { [weak self] searchResults in
             if let searchResults = searchResults {
-
                 self?.posts = searchResults.results
-                
             }
         }
-        layoutTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.hidesBarsOnSwipe = true
+        navigationItem.title = "Instagram"
+       
     }
     
     private func layoutTableView() {
         view.addSubview(mainTableView)
-        
         NSLayoutConstraint.activate([
-            mainTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

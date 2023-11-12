@@ -80,7 +80,6 @@ final class ProfileViewController: UIViewController {
             self.animatingImageView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             self.animatingImageView.center = self.view.center
             self.animatingImageView.layer.cornerRadius = 0
-            self.navigationController?.navigationBar.isHidden = true
         } completion: { _ in
             self.view.addSubview(self.closeButton)
         }
@@ -93,7 +92,6 @@ final class ProfileViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.animatingImageView.frame = self.initialImageRect
             self.animatingImageView.layer.cornerRadius = 50
-            self.navigationController?.navigationBar.isHidden = false
         } completion: { _ in
             self.animatingImageView.removeFromSuperview()
         }

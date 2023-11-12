@@ -13,19 +13,39 @@ final class NetworkService {
     private let token = "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"
     private init() {}
     
-    func getPosts(_ completion: @escaping (Data?, Error?) -> ())  {
+    func getComponents() -> URLComponents {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
         urlComponents.path = "/search/photos"
+        
         urlComponents.queryItems = [
             URLQueryItem(name: "page", value: "1"),
             URLQueryItem(name: "query", value: "relevant"),
             URLQueryItem(name: "per_page", value: "30"),
             URLQueryItem(name: "order_by", value: "popular"),
-            //                        URLQueryItem(name: "client_id", value: "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"),
         ]
+        return urlComponents
+    }
+    
+    func getSearchComponents(query: String) -> URLComponents {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.unsplash.com"
+        urlComponents.path = "/search/photos"
+        urlComponents.query = query
         
+        urlComponents.queryItems = [
+            URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "query", value: query),
+            URLQueryItem(name: "per_page", value: "30"),
+            URLQueryItem(name: "order_by", value: "popular"),
+        ]
+        return urlComponents
+    }
+    
+    func getPosts(searchTerm: String, _ completion: @escaping (Data?, Error?) -> ())  {
+        var urlComponents = getSearchComponents(query: searchTerm)
         guard let url = urlComponents.url else { return }
         //        print("URL: \(url)")
         var request = URLRequest(url: url)
