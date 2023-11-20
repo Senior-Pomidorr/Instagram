@@ -32,11 +32,11 @@ final class MainFeedViewController: UIViewController {
         view.backgroundColor = .white
         layoutTableView()
         
-        networkDataFetcher.fetchImages(searchTerm: "popular") { [weak self] searchResults in
-            if let searchResults = searchResults {
-                self?.posts = searchResults.results
-            }
-        }
+//        networkDataFetcher.fetchImages(searchTerm: "popular") { [weak self] searchResults in
+//            if let searchResults = searchResults {
+//                self?.posts = searchResults.results
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

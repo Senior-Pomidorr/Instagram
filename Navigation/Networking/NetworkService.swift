@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class NetworkService {
     
     static let shared = NetworkService()
@@ -44,18 +45,25 @@ final class NetworkService {
         return urlComponents
     }
     
-    func getPosts(searchTerm: String, _ completion: @escaping (Data?, Error?) -> ())  {
+    func getPosts(searchTerm: String, _ completion: @escaping (Result<Data, Error>) -> ())  {
         var urlComponents = getSearchComponents(query: searchTerm)
-        guard let url = urlComponents.url else { return }
-        //        print("URL: \(url)")
+        guard let url = urlComponents.url else {
+            completion(.failure(NetworkingError.badUrl))
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("Client-ID \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            print("REQUEST \(request)")
-            guard error == nil else {
-                print(error?.localizedDescription ?? "error")
+            print("REQUEST: - \(request)")
+            
+            guard let data else {
+                if let error {
+                    completion(.failure(error))
+                    print(error.localizedDescription)
+                }
                 return
             }
             
@@ -64,10 +72,13 @@ final class NetworkService {
             }
             
             DispatchQueue.main.async {
-                completion(data, error)
-//                print("Response posts data = \(String(decoding: data!, as: UTF8.self))")
+                completion(.success(data))
+                print("Response posts data = \(String(decoding: data, as: UTF8.self))")
             }
         }.resume()
     }
+    
 }
+
+
 

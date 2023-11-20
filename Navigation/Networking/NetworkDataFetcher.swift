@@ -9,28 +9,34 @@ import Foundation
 
 class NetworkDataFetcher {
     
-    func fetchImages(searchTerm: String, completion: @escaping (SearchResults?) -> ()) {
-        NetworkService.shared.getPosts(searchTerm: searchTerm) { data, error in
-            if let error = error {
-                print("Error recived requesting data: \(error.localizedDescription)")
-                completion(nil)
+    func fetchImages(searchTerm: String, completion: @escaping (Result<SearchResults?, Error>) -> ()) {
+        NetworkService.shared.getPosts(searchTerm: searchTerm) { result in
+            switch result {
+            case .success(let data):
+                
+                do {
+                    let decodeData = try self.decodeJSON(type: SearchResults.self, from: data)
+                    completion(.success(decodeData))
+                } catch {
+                    completion(.failure(NetworkingError.invalidData))
+                }
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            let decode = self.decodeJSON(type: SearchResults.self, from: data)
-            completion(decode)
         }
     }
     
-    func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
+    func decodeJSON<T: Decodable>(type: T.Type, from: Data?) throws -> T? {
         guard let data = from else { return nil }
+        
         do {
             let objects = try JSONDecoder().decode(type.self, from: data)
             return objects
         } catch let jsonError {
-            print("Faile to decode JSON", jsonError)
+            print("Failed to decode JSON", jsonError)
             return nil
         }
     }
-    
 }
 
