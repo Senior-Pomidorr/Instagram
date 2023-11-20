@@ -31,12 +31,15 @@ final class MainFeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         layoutTableView()
-        
-//        networkDataFetcher.fetchImages(searchTerm: "popular") { [weak self] searchResults in
-//            if let searchResults = searchResults {
-//                self?.posts = searchResults.results
-//            }
-//        }
+        networkDataFetcher.fetchImages(searchTerm: "popular") { result in
+            switch result {
+            case .success(let fetchImages):
+                guard let fetchImages else { return }
+                self.posts = fetchImages.results
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
