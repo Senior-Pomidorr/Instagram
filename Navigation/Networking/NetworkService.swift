@@ -10,11 +10,10 @@ import Foundation
 final class NetworkService {
     
     static let shared = NetworkService()
-    
     private let token = "h7_bDw4e3X7fgQ7bBio61x9dqx8u_okLt5C-CWDhZfI"
     private init() {}
     
-    func getComponents() -> URLComponents {
+    private func getFeedComponents() -> URLComponents {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
@@ -29,7 +28,7 @@ final class NetworkService {
         return urlComponents
     }
     
-    func getSearchComponents(query: String) -> URLComponents {
+    private func getSearchComponents(query: String) -> URLComponents {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
@@ -45,39 +44,32 @@ final class NetworkService {
         return urlComponents
     }
     
-    func getPosts(searchTerm: String, _ completion: @escaping (Result<Data, Error>) -> ())  {
-        var urlComponents = getSearchComponents(query: searchTerm)
+    func getPosts(searchTerm: String) async throws -> Data {
+        let urlComponents = getSearchComponents(query: searchTerm)
         guard let url = urlComponents.url else {
-            completion(.failure(NetworkingError.badUrl))
-            return
+            throw NetworkingError.badUrl
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.get.rawValue
-        request.setValue("Client-ID \(token)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        do {
+            var request = URLRequest(url: url)
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.setValue("Client-ID \(token)", forHTTPHeaderField: "Authorization")
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
             print("REQUEST: - \(request)")
             
-            guard let data else {
-                if let error {
-                    completion(.failure(error))
-                    print(error.localizedDescription)
-                }
-                return
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Response status code: \(httpResponse.statusCode)")
             }
             
-            if let resp = response as? HTTPURLResponse {
-                print("Response status code: \(resp.statusCode)")
-            }
-            
-            DispatchQueue.main.async {
-                completion(.success(data))
+           
                 print("Response posts data = \(String(decoding: data, as: UTF8.self))")
-            }
-        }.resume()
+           
+            return data
+        } catch {
+            throw NetworkingError.badRequest
+        }
     }
-    
 }
 
 

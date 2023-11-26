@@ -31,14 +31,8 @@ final class MainFeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         layoutTableView()
-        networkDataFetcher.fetchImages(searchTerm: "popular") { result in
-            switch result {
-            case .success(let fetchImages):
-                guard let fetchImages else { return }
-                self.posts = fetchImages.results
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+        Task {
+            await fetchData()
         }
     }
     
@@ -47,6 +41,20 @@ final class MainFeedViewController: UIViewController {
         navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Instagram"
        
+    }
+    
+    private func fetchData() async {
+      
+            do {
+                let fetchedImages = try await networkDataFetcher.fetchImages(searchTerm: "popular")
+                // Обработайте полученные изображения
+                self.posts = fetchedImages.results
+                print("Fetched images: \(fetchedImages)")
+            } catch {
+                // Обработайте ошибку
+                print("Error fetching or decoding images: \(error.localizedDescription)")
+            }
+        
     }
     
     private func layoutTableView() {

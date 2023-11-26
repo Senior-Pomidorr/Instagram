@@ -112,16 +112,10 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
 extension SearchPhotosViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-            self.networkDataFetcher.fetchImages(searchTerm: searchText) { result in
-                switch result {
-                case .success(let searchData):
-                    guard let fetchedPhotos = searchData else { return }
-                    self.photos = fetchedPhotos.results
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            Task(priority: .medium) {
+             let searchData = try await self.networkDataFetcher.fetchImages(searchTerm: searchText)
+                self.photos = searchData.results
             }
         })
     }
