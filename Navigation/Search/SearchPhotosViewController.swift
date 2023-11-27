@@ -114,7 +114,7 @@ extension SearchPhotosViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
             Task(priority: .medium) {
-             let searchData = try await self.networkDataFetcher.fetchImages(searchTerm: searchText)
+             let searchData = try await self.networkDataFetcher.fetchSearchImages(searchTerm: searchText)
                 self.photos = searchData.results
             }
         })

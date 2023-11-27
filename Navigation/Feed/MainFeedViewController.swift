@@ -40,21 +40,16 @@ final class MainFeedViewController: UIViewController {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Instagram"
-       
     }
     
     private func fetchData() async {
-      
             do {
-                let fetchedImages = try await networkDataFetcher.fetchImages(searchTerm: "popular")
-                // Обработайте полученные изображения
+                let fetchedImages = try await networkDataFetcher.fetchSearchImages(searchTerm: "popular")
                 self.posts = fetchedImages.results
-                print("Fetched images: \(fetchedImages)")
+//                print("Fetched images: \(fetchedImages)")
             } catch {
-                // Обработайте ошибку
                 print("Error fetching or decoding images: \(error.localizedDescription)")
             }
-        
     }
     
     private func layoutTableView() {
