@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: - SearchFeed
 struct SearchResults: Decodable {
     let total: Int
     var results: [UnsplashPhoto]
@@ -31,7 +32,7 @@ struct UnsplashPhoto: Decodable {
 }
 
 struct User: Decodable {
-    let profile_image: [ProfileImage.RawValue: String]
+    let profile_image: [ProfileImage.RawValue:String]
     let username: String
     
     enum ProfileImage: String {
@@ -41,7 +42,24 @@ struct User: Decodable {
     }
 }
 
-//struct DescriptionText: Decodable {
+//MARK: - MainFeed
+struct FeedPhotos: Decodable {
+    let urls: [URLMainImage.RawValue: String]
 //    let description: String
-//}
+    var likes: Int
+    let user: UserMain
+    enum URLMainImage: String {
+        case raw
+        case full
+        case regular
+        case small
+        case thumb
+    }
+}
+
+//MARK - MainFeedUser
+struct UserMain: Decodable{
+    let username: String
+}
+
 

@@ -10,7 +10,7 @@ import Kingfisher
 
 final class MainFeedViewController: UIViewController {
     private var likes = [SearchResults]()
-    private var posts: [UnsplashPhoto] = [] {
+    private var posts: [FeedPhotos] = [] {
         didSet {
             return self.mainTableView.reloadData()
         }
@@ -44,8 +44,8 @@ final class MainFeedViewController: UIViewController {
     
     private func fetchData() async {
             do {
-                let fetchedImages = try await networkDataFetcher.fetchSearchImages(searchTerm: "popular")
-                self.posts = fetchedImages.results
+                let fetchedImages = try await networkDataFetcher.fetchFeedPosts()
+                self.posts = fetchedImages
 //                print("Fetched images: \(fetchedImages)")
             } catch {
                 print("Error fetching or decoding images: \(error.localizedDescription)")
@@ -70,7 +70,7 @@ extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
-        cell.configure(posts, indexPath: indexPath)
+        cell.configureMainFeed(posts, indexPath: indexPath)
         cell.delegate = self
         return cell
     }

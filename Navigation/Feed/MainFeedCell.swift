@@ -142,6 +142,19 @@ final class MainFeedCell: UICollectionViewCell {
 //        self.descriptionText.text = post[indexPath.item].cover_photo.description
     }
     
+    func configureMainFeed(_ post: [FeedPhotos], indexPath: IndexPath) {
+        guard let urlString = post[indexPath.item].urls["regular"] else { return }
+        let url = URL(string: urlString)
+        self.photoImage.kf.indicatorType = .activity
+        self.photoImage.kf.setImage(with: url)
+        self.textLikes.text = "Likes: \(String(post[indexPath.item].likes))"
+        
+        guard let urlPhotoString = post[indexPath.item].urls["regular"] else { return }
+        let urlPhoto = URL(string: urlPhotoString)
+        self.avatarImage.kf.setImage(with: urlPhoto)
+        self.autorName.text = post[indexPath.item].user.username
+    }
+    
     @objc func tapLikeButton() {
         delegate?.tapLikeButton()
     }

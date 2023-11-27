@@ -8,15 +8,15 @@
 import Foundation
 
 final class NetworkDataFetcher {
-    func fetchSearchImages(searchTerm: String) async throws -> SearchResults {
+    func fetchSearchPosts(searchTerm: String) async throws -> SearchResults {
         let data = try await NetworkService.shared.getPosts(query: .getSearchQuery(searchTerm))
         let decodedData = try decodeJSON(type: SearchResults.self, from: data)
         return decodedData
     }
     
-    func fetchFeedImages() async throws -> SearchResults {
+    func fetchFeedPosts() async throws -> [FeedPhotos] {
         let data = try await NetworkService.shared.getPosts(query: .getFeedQuery)
-        let decodedData = try decodeJSON(type: SearchResults.self, from: data)
+        let decodedData = try decodeJSON(type: [FeedPhotos].self, from: data)
         return decodedData
     }
     
