@@ -52,9 +52,7 @@ final class MainFeedCell: UICollectionViewCell {
     
     lazy var photoImage: UIImageView = {
         let image = UIImageView()
-//        image.backgroundColor = .blue
         image.contentMode = .scaleAspectFill
-//        image.backgroundColor = .red
         image.clipsToBounds = true
         return image.autoLayout()
     }()
@@ -76,7 +74,10 @@ final class MainFeedCell: UICollectionViewCell {
     lazy var descriptionText: UITextView = {
        let text = UITextView()
         text.textColor = .black
+        text.text = "Some Description"
         text.font = .systemFont(ofSize: 16)
+        text.textAlignment = .left
+        text.textContainer.maximumNumberOfLines = 3
         return text.autoLayout()
     }()
     
@@ -148,6 +149,7 @@ final class MainFeedCell: UICollectionViewCell {
         self.photoImage.kf.indicatorType = .activity
         self.photoImage.kf.setImage(with: url)
         self.textLikes.text = "Likes: \(String(post[indexPath.item].likes))"
+        self.descriptionText.text = post[indexPath.item].description
         
         guard let urlPhotoString = post[indexPath.item].urls["regular"] else { return }
         let urlPhoto = URL(string: urlPhotoString)
@@ -213,10 +215,10 @@ final class MainFeedCell: UICollectionViewCell {
             textLikes.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
             textLikes.heightAnchor.constraint(equalToConstant: 40),
             
-//            descriptionText.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
-//            descriptionText.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
-//            descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
-//            descriptionText.heightAnchor.constraint(equalToConstant: 40),
+            descriptionText.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
+            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
+            descriptionText.heightAnchor.constraint(equalToConstant: 70),
         ])
     }
 }

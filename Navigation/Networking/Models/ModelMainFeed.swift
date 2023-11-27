@@ -45,7 +45,7 @@ struct User: Decodable {
 //MARK: - MainFeed
 struct FeedPhotos: Decodable {
     let urls: [URLMainImage.RawValue: String]
-//    let description: String
+    let description: String?
     var likes: Int
     let user: UserMain
     enum URLMainImage: String {
