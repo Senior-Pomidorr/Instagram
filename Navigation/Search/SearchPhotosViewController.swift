@@ -124,20 +124,26 @@ extension SearchPhotosViewController: UISearchBarDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension SearchPhotosViewController: UICollectionViewDelegateFlowLayout{
     
+    private var sideInset: CGFloat { return 8 }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let photo = photos[indexPath.item]
-        let space = sectionInserts.left * (itemsPerRow + 1)
-        let avalibleWidth = view.frame.width - space
-        let widthPerItem = avalibleWidth / itemsPerRow
-        let height = CGFloat(photo.height) * widthPerItem / CGFloat(photo.width )
-        return CGSize(width: widthPerItem, height: height)
+        let width = itemWidth(for: collectionView.frame.width, spacing: 0)
+        return CGSize(width: width, height: width)
     }
+    
+    func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
+        let totalSpasing: CGFloat = 4 * spacing + (4 - 3) * spacing
+        let finalWidth = (width - totalSpasing) / 3.2
+        return finalWidth
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+//    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(sectionInserts.left)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInserts
+        return 2
     }
 }
+

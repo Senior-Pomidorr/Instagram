@@ -77,6 +77,7 @@ final class MainFeedCell: UICollectionViewCell {
         text.text = "Some Description"
         text.font = .systemFont(ofSize: 16)
         text.textAlignment = .left
+        text.isScrollEnabled = false
         text.textContainer.maximumNumberOfLines = 3
         return text.autoLayout()
     }()
@@ -143,10 +144,10 @@ final class MainFeedCell: UICollectionViewCell {
         self.photoImage.kf.setImage(with: url)
         self.textLikes.text = "Likes: \(String(post[indexPath.item].likes))"
         
-        guard let urlPhotoString = post[indexPath.item].user.profile_image["medium"] else { return }
-        let urlPhoto = URL(string: urlPhotoString)
-        self.avatarImage.kf.setImage(with: urlPhoto)
-        self.autorName.text = post[indexPath.item].user.username
+//        guard let urlPhotoString = post[indexPath.item].user.profile_image["medium"] else { return }
+//        let urlPhoto = URL(string: urlPhotoString)
+//        self.avatarImage.kf.setImage(with: urlPhoto)
+//        self.autorName.text = post[indexPath.item].user.username
 //        self.descriptionText.text = post[indexPath.item].cover_photo.description
     }
     
@@ -222,12 +223,12 @@ final class MainFeedCell: UICollectionViewCell {
             
             textLikes.leadingAnchor.constraint(equalTo: contentViewCell.leadingAnchor, constant: 10),
             textLikes.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
-            textLikes.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
-            textLikes.heightAnchor.constraint(equalToConstant: 40),
+            textLikes.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
+            textLikes.heightAnchor.constraint(equalToConstant: 26),
             
-            descriptionText.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
-            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
-            descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
+            descriptionText.topAnchor.constraint(equalTo: textLikes.bottomAnchor),
+            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
             descriptionText.heightAnchor.constraint(equalToConstant: 70),
         ])
     }

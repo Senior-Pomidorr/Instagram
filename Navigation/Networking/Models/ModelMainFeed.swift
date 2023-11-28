@@ -18,7 +18,7 @@ struct UnsplashPhoto: Decodable {
     let height: Int
     let likes: Int
     let urls: [URLKIng.RawValue:String]
-    let user: User
+//    let user: User
 //    let cover_photo: DescriptionText
     
     enum URLKIng: String {
@@ -32,7 +32,7 @@ struct UnsplashPhoto: Decodable {
 
 struct User: Decodable {
     let profile_image: [ProfileImage.RawValue:String]
-    let username: String
+//    let username: String
     
     enum ProfileImage: String {
         case small
