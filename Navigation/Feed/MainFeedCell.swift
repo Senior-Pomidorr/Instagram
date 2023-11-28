@@ -102,6 +102,13 @@ final class MainFeedCell: UICollectionViewCell {
         return button.autoLayout()
     }()
     
+    private lazy var menuButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .black
+        return button.autoLayout()
+    }()
+    
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 14
@@ -151,9 +158,9 @@ final class MainFeedCell: UICollectionViewCell {
         self.textLikes.text = "Likes: \(String(post[indexPath.item].likes))"
         self.descriptionText.text = post[indexPath.item].description
         
-        guard let urlPhotoString = post[indexPath.item].urls["regular"] else { return }
-        let urlPhoto = URL(string: urlPhotoString)
-        self.avatarImage.kf.setImage(with: urlPhoto)
+        guard let urlPhoto = post[indexPath.item].user.profileImage["medium"] else { return }
+        let urlProfile = URL(string: urlPhoto)
+        self.avatarImage.kf.setImage(with: urlProfile)
         self.autorName.text = post[indexPath.item].user.username
     }
     
@@ -177,7 +184,7 @@ final class MainFeedCell: UICollectionViewCell {
     private func layoutCell() {
         contentView.addSubview(contentViewCell)
         
-        [avatarImage, autorName, locationName, photoImage, stack , bookmarksButton, textLikes, descriptionText].forEach { contentViewCell.addSubview($0) }
+        [avatarImage, autorName, locationName, menuButton, photoImage, stack , bookmarksButton, textLikes, descriptionText].forEach { contentViewCell.addSubview($0) }
         
         [likeButton, commentButton, messageButton].forEach { stack.addArrangedSubview($0) }
         
@@ -194,6 +201,9 @@ final class MainFeedCell: UICollectionViewCell {
             
             autorName.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
             autorName.topAnchor.constraint(equalTo: contentViewCell.topAnchor, constant: 11),
+            
+            menuButton.centerYAnchor.constraint(equalTo: avatarImage.centerYAnchor),
+            menuButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             locationName.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
             locationName.topAnchor.constraint(equalTo: autorName.bottomAnchor, constant: 1),
@@ -216,7 +226,7 @@ final class MainFeedCell: UICollectionViewCell {
             textLikes.heightAnchor.constraint(equalToConstant: 40),
             
             descriptionText.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 5),
-            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
             descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -14),
             descriptionText.heightAnchor.constraint(equalToConstant: 70),
         ])

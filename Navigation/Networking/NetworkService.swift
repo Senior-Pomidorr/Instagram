@@ -50,7 +50,6 @@ final class NetworkService {
     
     func getPosts(query: Endpoint) async throws -> Data {
         var urlComponents = URLComponents()
-        
         switch query {
         case .getFeedQuery:
             urlComponents = getFeedComponents()
@@ -58,7 +57,6 @@ final class NetworkService {
             urlComponents = getSearchComponents(search: searchQuery)
         }
         
-        //        let urlComponents = getSearchComponents(query: searchTerm)
         guard let url = urlComponents.url else {
             throw NetworkingError.badUrl
         }
@@ -67,11 +65,12 @@ final class NetworkService {
             var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.get.rawValue
             request.setValue("Client-ID \(token)", forHTTPHeaderField: "Authorization")
+            
             let (data, response) = try await URLSession.shared.data(for: request)
             print("REQUEST: - \(request)")
+            
             guard let httpResponse = response as? HTTPURLResponse else { throw NetworkingError.badResponse }
             print("Response status code: \(httpResponse.statusCode)")
-            
             //                print("Response posts data = \(String(decoding: data, as: UTF8.self))")
             return data
         } catch {

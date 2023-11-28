@@ -21,8 +21,10 @@ final class NetworkDataFetcher {
     }
     
     private func decodeJSON<T: Decodable>(type: T.Type, from data: Data) throws  -> T {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            let objects = try JSONDecoder().decode(type.self, from: data)
+            let objects = try decoder.decode(type.self, from: data)
             return objects
         } catch let jsonError {
             print("Failed to decode JSON", jsonError)
