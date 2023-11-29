@@ -20,7 +20,7 @@ final class NetworkDataFetcher {
         return decodedData
     }
     
-    private func decodeJSON<T: Decodable>(type: T.Type, from data: Data) throws  -> T {
+    private func decodeJSON<T: Decodable>(type: T.Type, from data: Data) throws -> T {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {

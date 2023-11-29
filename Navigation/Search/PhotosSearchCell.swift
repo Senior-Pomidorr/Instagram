@@ -40,6 +40,7 @@ final class PhotosSearchCell: UICollectionViewCell {
         photoImage.image = nil
     }
     
+    // MARK: - CellLayout
     private func setupLayout() {
         addSubview(photoImage)
         

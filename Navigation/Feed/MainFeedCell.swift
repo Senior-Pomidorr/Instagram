@@ -132,6 +132,8 @@ final class MainFeedCell: UITableViewCell {
         avatarImage.image = nil
         autorName.text = nil
         textLikes.text = nil
+        descriptionText.text = nil
+        locationName.text = nil
     }
     
     

@@ -54,14 +54,15 @@ final class NetworkService {
         switch query {
         case .getFeedQuery:
             urlComponents = getFeedComponents()
+            page += 1
         case let .getSearchQuery(searchQuery):
             urlComponents = getSearchComponents(search: searchQuery)
+            page += 1
         }
         
         guard let url = urlComponents.url else {
             throw NetworkingError.badUrl
         }
-        page += 1
         do {
             var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.get.rawValue

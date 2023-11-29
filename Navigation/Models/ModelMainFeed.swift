@@ -17,7 +17,7 @@ struct UnsplashPhoto: Decodable {
     let width: Int
     let height: Int
     let likes: Int
-    let urls: [URLKIng.RawValue:String]
+    let urls: [URLKIng.RawValue: String]
 //    let user: User
 //    let cover_photo: DescriptionText
     

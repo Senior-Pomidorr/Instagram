@@ -15,6 +15,8 @@ final class SearchPhotosViewController: UICollectionViewController, UISearchCont
     private let itemsPerRow: CGFloat = 2
     private let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     private var selectedImages = [UIImage]()
+    private var pagination = false
+    private var searchTextCopy = String()
     
     private var photos: [UnsplashPhoto] = [] {
         didSet {
@@ -113,11 +115,26 @@ extension SearchPhotosViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-            Task(priority: .medium) {
+            Task(priority: .background) {
              let searchData = try await self.networkDataFetcher.fetchSearchPosts(searchTerm: searchText)
                 self.photos = searchData.results
+                self.searchTextCopy = searchText
             }
         })
+    }
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == photos.count - 1 && !pagination {
+            pagination = true
+            Task(priority: .background) {
+                do {
+                    let morePosts = try await networkDataFetcher.fetchSearchPosts(searchTerm: searchTextCopy)
+                    self.photos.append(contentsOf: morePosts.results)
+                    pagination = false
+                } catch {
+                    print("Error fetching on pagination")
+                }
+            }
+        }
     }
 }
 
@@ -137,10 +154,25 @@ extension SearchPhotosViewController: UICollectionViewDelegateFlowLayout{
         return finalWidth
     }
     
+    
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //        return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 //    }
     
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if indexPath.item == photos.count - 5 && !pagination {
+//            pagination = true
+//            Task(priority: .background) {
+//                do {
+//                    let morePosts = try await networkDataFetcher.fetchSearchPosts(searchTerm: searchTextCopy)
+//                    self.photos = morePosts.results
+//                } catch {
+//                    print("Error fetching on pagination")
+//                }
+//                pagination = false
+//            }
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
