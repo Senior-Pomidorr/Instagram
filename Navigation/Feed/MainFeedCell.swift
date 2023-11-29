@@ -37,7 +37,7 @@ final class MainFeedCell: UICollectionViewCell {
     private lazy var autorName: UILabel = {
         let label = UILabel()
         label.text = "Author Name"
-        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = .black
         return label.autoLayout()
     }()
@@ -64,21 +64,19 @@ final class MainFeedCell: UICollectionViewCell {
         return button.autoLayout()
     }()
     
-    lazy var textLikes: UITextView = {
-       let text = UITextView()
+    lazy var textLikes: UILabel = {
+       let text = UILabel()
         text.textColor = .black
         text.font = .systemFont(ofSize: 16)
         return text.autoLayout()
     }()
     
-    lazy var descriptionText: UITextView = {
-       let text = UITextView()
+    lazy var descriptionText: UILabel = {
+       let text = UILabel()
         text.textColor = .black
         text.text = "Some Description"
         text.font = .systemFont(ofSize: 16)
-        text.textAlignment = .left
-        text.isScrollEnabled = false
-        text.textContainer.maximumNumberOfLines = 3
+        text.numberOfLines = 3
         return text.autoLayout()
     }()
     
@@ -120,7 +118,7 @@ final class MainFeedCell: UICollectionViewCell {
     }()
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         layoutCell()
     }
     
@@ -135,6 +133,7 @@ final class MainFeedCell: UICollectionViewCell {
         autorName.text = nil
         textLikes.text = nil
     }
+    
     
     //MARK: - CofigureCell
     func configure(_ post: [UnsplashPhoto], indexPath: IndexPath) {
@@ -229,7 +228,7 @@ final class MainFeedCell: UICollectionViewCell {
             descriptionText.topAnchor.constraint(equalTo: textLikes.bottomAnchor),
             descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
-            descriptionText.heightAnchor.constraint(equalToConstant: 70),
+            descriptionText.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 }

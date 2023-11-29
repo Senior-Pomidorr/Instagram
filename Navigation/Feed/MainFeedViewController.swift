@@ -19,8 +19,8 @@ final class MainFeedViewController: UIViewController {
     
     private lazy var mainTableView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .vertical
+        let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
         table.dataSource = self
         table.delegate = self
         table.register(MainFeedCell.self, forCellWithReuseIdentifier: MainFeedCell.identifier)
@@ -76,8 +76,9 @@ extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 575)
+        return CGSize(width: collectionView.bounds.width, height: 538)
     }
+   
 }
 
 extension MainFeedViewController: mainViewCellDelagate {
