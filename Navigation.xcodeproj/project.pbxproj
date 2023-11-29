@@ -121,10 +121,10 @@
 		0D36595A29950EA7008C47CC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				0DD393752AF7FA1900AB8CDF /* Networking */,
 				0D36599A2999289D008C47CC /* Application */,
+				0DD393752AF7FA1900AB8CDF /* Networking */,
+				0D565EB32B003E82001B97DA /* Models */,
 				0DD393742AF6AF0000AB8CDF /* TabBar */,
-				0DACF3CE29ABC9EB00507C01 /* Mocks Models */,
 				0DACF3D729AE1E0200507C01 /* Login */,
 				0D57880429A0CEF7008036D7 /* Profile */,
 				0D9DA58E29B25DD0001E6147 /* Photos */,
@@ -166,6 +166,7 @@
 		0D565EB32B003E82001B97DA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0DACF3CE29ABC9EB00507C01 /* Mocks Models */,
 				0DD3938C2AF9191700AB8CDF /* ModelMainFeed.swift */,
 			);
 			path = Models;
@@ -243,7 +244,6 @@
 				0DD3938A2AF90DFF00AB8CDF /* NetworkService.swift */,
 				0D565EAE2AFC0402001B97DA /* NetworkDataFetcher.swift */,
 				0DD393782AF7FB4600AB8CDF /* HTTPMethod.swift */,
-				0D565EB32B003E82001B97DA /* Models */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

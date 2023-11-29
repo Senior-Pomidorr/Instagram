@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 
 final class MainFeedViewController: UIViewController {
+   
+    
     private var likes = [SearchResults]()
     private var posts: [FeedPhotos] = [] {
         didSet {
@@ -17,13 +19,12 @@ final class MainFeedViewController: UIViewController {
     }
     private var networkDataFetcher = NetworkDataFetcher()
     
-    private lazy var mainTableView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let table = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private lazy var mainTableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .plain)
+        table.separatorStyle = .none
         table.dataSource = self
         table.delegate = self
-        table.register(MainFeedCell.self, forCellWithReuseIdentifier: MainFeedCell.identifier)
+        table.register(MainFeedCell.self, forCellReuseIdentifier: MainFeedCell.identifier)
         return table.autoLayout()
     }()
     
@@ -63,22 +64,22 @@ final class MainFeedViewController: UIViewController {
     }
 }
 
-extension MainFeedViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MainFeedCell.identifier, for: indexPath) as! MainFeedCell
         cell.configureMainFeed(posts, indexPath: indexPath)
         cell.delegate = self
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 538)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
-   
 }
 
 extension MainFeedViewController: mainViewCellDelagate {

@@ -15,7 +15,7 @@ protocol mainViewCellDelagate: AnyObject {
     func tapBookmark()
 }
 
-final class MainFeedCell: UICollectionViewCell {
+final class MainFeedCell: UITableViewCell {
     
     weak var delegate: mainViewCellDelagate?
     
@@ -117,8 +117,8 @@ final class MainFeedCell: UICollectionViewCell {
         return stack.autoLayout()
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         layoutCell()
     }
     
@@ -228,7 +228,8 @@ final class MainFeedCell: UICollectionViewCell {
             descriptionText.topAnchor.constraint(equalTo: textLikes.bottomAnchor),
             descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             descriptionText.trailingAnchor.constraint(equalTo: contentViewCell.trailingAnchor, constant: -10),
-            descriptionText.heightAnchor.constraint(equalToConstant: 40)
+//            descriptionText.heightAnchor.constraint(equalToConstant: 40),
+            descriptionText.bottomAnchor.constraint(equalTo: contentViewCell.bottomAnchor, constant: -24)
         ])
     }
 }
