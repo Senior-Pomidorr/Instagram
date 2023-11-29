@@ -148,7 +148,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             let showPostVC = ShowPostViewController(model: profilePosts[indexPath.row], indexPath: indexPath)
             present(showPostVC, animated: true)
-            
         }
     }
     

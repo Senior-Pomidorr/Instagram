@@ -27,7 +27,7 @@ final class NetworkService {
         urlComponents.queryItems = [
             URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "query", value: "relevant"),
-            URLQueryItem(name: "per_page", value: "30"),
+            URLQueryItem(name: "per_page", value: "40"),
             URLQueryItem(name: "order_by", value: "popular"),
         ]
         return urlComponents
@@ -49,6 +49,7 @@ final class NetworkService {
     }
     
     func getPosts(query: Endpoint) async throws -> Data {
+        
         var urlComponents = URLComponents()
         switch query {
         case .getFeedQuery:
@@ -60,7 +61,7 @@ final class NetworkService {
         guard let url = urlComponents.url else {
             throw NetworkingError.badUrl
         }
-        
+        page += 1
         do {
             var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.get.rawValue

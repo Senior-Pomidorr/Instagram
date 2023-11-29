@@ -9,12 +9,12 @@ import UIKit
 import Kingfisher
 
 final class MainFeedViewController: UIViewController {
-   
+    var pagination = false
     
     private var likes = [SearchResults]()
     private var posts: [FeedPhotos] = [] {
         didSet {
-            return self.mainTableView.reloadData()
+            return mainTableView.reloadData()
         }
     }
     private var networkDataFetcher = NetworkDataFetcher()
@@ -22,6 +22,7 @@ final class MainFeedViewController: UIViewController {
     private lazy var mainTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.separatorStyle = .none
+        table.allowsSelection = false
         table.dataSource = self
         table.delegate = self
         table.register(MainFeedCell.self, forCellReuseIdentifier: MainFeedCell.identifier)
@@ -44,13 +45,13 @@ final class MainFeedViewController: UIViewController {
     }
     
     private func fetchData() async {
-            do {
-                let fetchedImages = try await networkDataFetcher.fetchFeedPosts()
-                self.posts = fetchedImages
-//                print("Fetched images: \(fetchedImages)")
-            } catch {
-                print("Error fetching or decoding images: \(error.localizedDescription)")
-            }
+        do {
+            let fetchedImages = try await networkDataFetcher.fetchFeedPosts()
+            self.posts = fetchedImages
+            //                print("Fetched images: \(fetchedImages)")
+        } catch {
+            print("Error fetching or decoding images: \(error.localizedDescription)")
+        }
     }
     
     private func layoutTableView() {
@@ -64,7 +65,7 @@ final class MainFeedViewController: UIViewController {
     }
 }
 
-extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -80,6 +81,24 @@ extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+        if indexPath.row == posts.count - 5 && !pagination {
+            pagination = true
+            Task(priority: .background) {
+                do {
+                    let morePosts = try await networkDataFetcher.fetchFeedPosts()
+                    self.posts.append(contentsOf: morePosts)
+                } catch {
+                    print("Error fetching on pagination")
+                }
+                pagination = false
+            }
+        }
+    }
+    
+    
 }
 
 extension MainFeedViewController: mainViewCellDelagate {
