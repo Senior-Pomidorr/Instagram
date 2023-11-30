@@ -115,7 +115,7 @@ extension SearchPhotosViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-            Task(priority: .background) {
+            Task {
              let searchData = try await self.networkDataFetcher.fetchSearchPosts(searchTerm: searchText)
                 self.photos = searchData.results
                 self.searchTextCopy = searchText
@@ -153,26 +153,6 @@ extension SearchPhotosViewController: UICollectionViewDelegateFlowLayout{
         let finalWidth = (width - totalSpasing) / 3.2
         return finalWidth
     }
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-//    }
-    
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.item == photos.count - 5 && !pagination {
-//            pagination = true
-//            Task(priority: .background) {
-//                do {
-//                    let morePosts = try await networkDataFetcher.fetchSearchPosts(searchTerm: searchTextCopy)
-//                    self.photos = morePosts.results
-//                } catch {
-//                    print("Error fetching on pagination")
-//                }
-//                pagination = false
-//            }
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2

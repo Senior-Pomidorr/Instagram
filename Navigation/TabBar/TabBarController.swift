@@ -13,25 +13,26 @@ final class UiTabBarController: UITabBarController {
         super.viewDidLoad()
         self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = .black
+        tabBar.backgroundColor = .white
         
         viewControllers = [
             generateNavigationController(
                 rootViewController: MainFeedViewController(),
-                title: "Main",
+                title: "",
                 image: UIImage(
                     named: "main"
                 )!
             ),
             generateNavigationController(
                 rootViewController: SearchPhotosViewController(collectionViewLayout: UICollectionViewFlowLayout()),
-                title: "Search",
+                title: "",
                 image: UIImage(
                     named: "search"
                 )!
             ),
             generateNavigationController(
                 rootViewController: LogInViewController(),
-                title: "Profile",
+                title: "",
                 image: UIImage(
                     systemName: "person.fill"
                 )!
@@ -42,7 +43,7 @@ final class UiTabBarController: UITabBarController {
     
     // MARK: - Setup ViewControllers
     
-    private func generateNavigationController(rootViewController: UIViewController, title: String?, image: UIImage) -> UIViewController {
+    private func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = image

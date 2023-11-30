@@ -29,10 +29,12 @@ final class MainFeedViewController: UIViewController {
         return table.autoLayout()
     }()
     
+    //MARK: - Load
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         layoutTableView()
+        customNavigationBar()
         Task {
             await fetchData()
         }
@@ -41,7 +43,12 @@ final class MainFeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.hidesBarsOnSwipe = true
-        navigationItem.title = "Instagram"
+//    let startindex = posts.count.words.startIndex
+//        if indexPath.row == startindex, startindex == 0 {
+//            navigationController?.hidesBarsOnSwipe = false
+//        } else {
+//            navigationController?.hidesBarsOnSwipe = true
+//        }
     }
     
     private func fetchData() async {
@@ -54,6 +61,52 @@ final class MainFeedViewController: UIViewController {
         }
     }
     
+    //MARK: - CustomNavigationBar
+    private func customNavigationBar() {
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.leftBarButtonItem = customTitleBar(image: "InstagramLogo")
+        navigationItem.rightBarButtonItems = [createCustomButton(imageName: "Messanger", selector: #selector(tapOnMessage)),  createCustomButton(imageName: "heart", selector: #selector(tapOnLike))]
+        navigationController?.navigationBar.backgroundColor = .white
+    }
+    
+    private func customTitleBar(image: String) -> UIBarButtonItem {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 140, height: 41)
+        
+        let imageLogo = UIImageView()
+        imageLogo.image = UIImage(named: image)
+        imageLogo.contentMode = .scaleAspectFill
+        imageLogo.frame = CGRect(x: 10, y: 5, width: 105, height: 34)
+        view.addSubview(imageLogo)
+        
+        let menuTabBarItem = UIBarButtonItem(customView: view)
+        return menuTabBarItem
+    }
+    
+    private func createCustomButton(imageName: String, selector: Selector) -> UIBarButtonItem {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: imageName)
+        button.setImage(image, for: .normal)
+        button.tintColor = .black
+        button.imageView?.contentMode = .scaleAspectFill
+//        button.contentVerticalAlignment = .fill
+//        button.contentHorizontalAlignment = .fill
+        button.frame = CGRect(x: 0, y: 5, width: 24, height: 34)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        
+        let menuTabBarItem = UIBarButtonItem(customView: button)
+        return menuTabBarItem
+    }
+    
+    @objc func tapOnLike() {
+        print(#function)
+    }
+    
+    @objc func tapOnMessage() {
+        print(#function)
+    }
+    
+    // MARK: - Layout
     private func layoutTableView() {
         view.addSubview(mainTableView)
         NSLayoutConstraint.activate([
@@ -65,6 +118,7 @@ final class MainFeedViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,6 +155,7 @@ extension MainFeedViewController: UITableViewDelegate, UITableViewDataSource, UI
     
 }
 
+//MARK: - Extension
 extension MainFeedViewController: mainViewCellDelagate {
     
     func tapLikeButton() {
