@@ -9,11 +9,11 @@ import UIKit
 
 final class UiTabBarController: UITabBarController {
     
-//    private let firstVC = UINavigationController(rootViewController: FeedViewController()) 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-          self.tabBar.backgroundColor = .white
+        self.tabBar.backgroundColor = .white
+        self.tabBar.tintColor = .black
+        
         viewControllers = [
             generateNavigationController(
                 rootViewController: MainFeedViewController(),
@@ -26,7 +26,7 @@ final class UiTabBarController: UITabBarController {
                 rootViewController: SearchPhotosViewController(collectionViewLayout: UICollectionViewFlowLayout()),
                 title: "Search",
                 image: UIImage(
-                    systemName: "magnifyingglass"
+                    named: "search"
                 )!
             ),
             generateNavigationController(
@@ -39,7 +39,9 @@ final class UiTabBarController: UITabBarController {
         ]
     }
     
-    //MARK: - Setup ViewControllers
+    
+    // MARK: - Setup ViewControllers
+    
     private func generateNavigationController(rootViewController: UIViewController, title: String?, image: UIImage) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.title = title
