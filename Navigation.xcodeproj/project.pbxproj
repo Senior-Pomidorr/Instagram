@@ -31,6 +31,7 @@
 		0D9DA59229B3A0FB001E6147 /* PhotoPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9DA59129B3A0FB001E6147 /* PhotoPost.swift */; };
 		0D9DA59429B50722001E6147 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9DA59329B50722001E6147 /* PhotoCollectionViewCell.swift */; };
 		0DA3D0BB2B18708A009FE95B /* ProfileNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA3D0BA2B18708A009FE95B /* ProfileNew.swift */; };
+		0DA3D0BE2B190FB3009FE95B /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA3D0BD2B190FB3009FE95B /* EditButton.swift */; };
 		0DACF3CD29A8B24500507C01 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3CC29A8B24500507C01 /* LogInViewController.swift */; };
 		0DACF3D229AD2F4800507C01 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */; };
 		0DACF3D429AD33EA00507C01 /* ProfilePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */; };
@@ -69,6 +70,7 @@
 		0D9DA59129B3A0FB001E6147 /* PhotoPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPost.swift; sourceTree = "<group>"; };
 		0D9DA59329B50722001E6147 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		0DA3D0BA2B18708A009FE95B /* ProfileNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNew.swift; sourceTree = "<group>"; };
+		0DA3D0BD2B190FB3009FE95B /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		0DACF3CC29A8B24500507C01 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0DACF3D129AD2F4800507C01 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0DACF3D329AD33EA00507C01 /* ProfilePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePosts.swift; sourceTree = "<group>"; };
@@ -200,8 +202,17 @@
 			isa = PBXGroup;
 			children = (
 				0DA3D0BA2B18708A009FE95B /* ProfileNew.swift */,
+				0DA3D0BF2B191032009FE95B /* Components */,
 			);
 			path = ProfileNew;
+			sourceTree = "<group>";
+		};
+		0DA3D0BF2B191032009FE95B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0DA3D0BD2B190FB3009FE95B /* EditButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		0DACF3CE29ABC9EB00507C01 /* Mocks Models */ = {
@@ -347,6 +358,7 @@
 				0DD393792AF7FB4600AB8CDF /* HTTPMethod.swift in Sources */,
 				0D3659932996F954008C47CC /* FeedViewController.swift in Sources */,
 				0D565EB52B004F1A001B97DA /* PhotosSearchCell.swift in Sources */,
+				0DA3D0BE2B190FB3009FE95B /* EditButton.swift in Sources */,
 				0D3659952996F967008C47CC /* ProfileViewController.swift in Sources */,
 				0D565EB12AFEBED4001B97DA /* SearchPhotosViewController.swift in Sources */,
 				0D9DA59029B2725C001E6147 /* PhotosViewController.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class LogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -112,8 +113,9 @@ final class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc private func logInButtonAction() -> Bool {
         if isValidEmailAddress(emailAddressString: sourceMail) {
             if textFieldLogin.text != sourceMail && textFieldPassword.text != password {
-                let profileView = ProfileViewController()
-                navigationController?.pushViewController(profileView, animated: true)
+                let newProfile = ProfileNew()
+                let hostingController = UIHostingController(rootView: newProfile)
+                navigationController?.pushViewController(hostingController, animated: true)
             } else {
                 print("inccorected Password")
                 let alert = UIAlertController(title: "Incorrect login or password", message: "Please, check your login or password", preferredStyle: .alert)
