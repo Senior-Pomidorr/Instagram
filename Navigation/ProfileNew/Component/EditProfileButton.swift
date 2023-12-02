@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditButton: View {
+struct EditProfileButton: View {
     var body: some View {
         Button() {
             
@@ -15,7 +15,8 @@ struct EditButton: View {
             Text("Edit Profile")
                 .fontWeight(.semibold)
                 .tint(.black)
-                .frame(maxWidth: .infinity, maxHeight: 29)
+                .frame(maxWidth: .infinity)
+                .frame(height: 29)
         }
         .overlay(
             RoundedRectangle(cornerRadius: 6)
@@ -26,5 +27,5 @@ struct EditButton: View {
 }
 
 #Preview {
-    EditButton()
+    EditProfileButton()
 }

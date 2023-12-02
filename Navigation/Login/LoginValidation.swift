@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 let sourceMail = "kanye@gmail.com"
 let password = "qwerty"
 func isValidEmailAddress(emailAddressString: String) -> Bool {

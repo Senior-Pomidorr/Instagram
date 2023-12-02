@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Endpoint {
+enum EndpointQuery {
     case getFeedQuery
     case getSearchQuery(String)
 }
@@ -48,8 +48,7 @@ final class NetworkService {
         return urlComponents
     }
     
-    func getPosts(query: Endpoint) async throws -> Data {
-        
+    func getPosts(query: EndpointQuery) async throws -> Data {
         var urlComponents = URLComponents()
         switch query {
         case .getFeedQuery:

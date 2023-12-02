@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class MainFeedViewController: UIViewController {
-    var pagination = false
+    private var pagination = false
     
     private var likes = [SearchResults]()
     private var posts: [FeedPhotos] = [] {
@@ -32,7 +32,6 @@ final class MainFeedViewController: UIViewController {
     //MARK: - Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         layoutTableView()
         customNavigationBar()
         Task {
@@ -108,6 +107,7 @@ final class MainFeedViewController: UIViewController {
     
     // MARK: - Layout
     private func layoutTableView() {
+        view.backgroundColor = .white
         view.addSubview(mainTableView)
         NSLayoutConstraint.activate([
             mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

@@ -134,6 +134,7 @@ final class MainFeedCell: UITableViewCell {
         textLikes.text = nil
         descriptionText.text = nil
         locationName.text = nil
+       
     }
     
     
